@@ -115,11 +115,31 @@ Part 2 策略目录
 
 Treat this skill as a multi-stage workflow. Keep track of which stage the user is in; when feedback arrives, route it to the right earlier stage instead of blindly regenerating slides.
 
+For long-form decks, maintain a visible task plan with statuses. The user should see progress through research, reusable materials, claims, slide briefs, imagegen prompts, generation, PPTX packaging, and QA. Update the plan when entering a new stage or completing a material checkpoint.
+
+Example:
+
+```text
+Updated Plan
+└ 页数已调整为40页，进入详细页稿与生成阶段。
+  ✔ 建立40页工程和可复用素材库
+  □ 调研厂商、会议、论文、开源、客户和投资观点
+  □ 保存来源文本、截图、引用摘录和素材索引
+  □ 形成核心洞察、客户/用户场景与买点分析
+  □ 形成策略架构、关键技术与量化目标
+  □ 形成40页详细页稿和 imagegen 提示词
+  □ 生成高密度 imagegen 页面并合成 PPTX
+  □ 检查 contact sheet、素材可复用性和交付说明
+```
+
+Keep the plan specific to the current deck. Do not leave generic tasks like "do research"; name the actual research domains or source groups when known.
+
 ### Stage 1: Frame
 
    - Confirm topic, audience, expected slide count, delivery mode, and whether there are reference decks/images.
    - State that the deck will be split into **洞察** and **策略**.
    - Ask the mandatory writing-direction questions: research focus, intended viewpoints, information density, and decision use.
+   - Create the initial visible plan after the user answers enough to proceed.
 
 ### Stage 2: Insight Agenda
 
@@ -142,6 +162,7 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
    - For competitor/technology pages, first understand the architecture and mechanism, then redraw the key technical principle in the deck. Use original screenshots as evidence and the redrawn diagram as interpretation.
    - Treat research and slide writing as auditable artifacts. Save synthesis notes, slide claims, and imagegen prompts in reviewable Markdown/JSON files so the user can inspect or edit them before regeneration.
    - Do not treat a quick web scan or a list of major vendors as "deep research". For long-form planning decks, Stage 3 must pass the research sufficiency gate below before writing the final outline or claiming the insight work is complete.
+   - Update the visible plan when each research group is completed: vendors, conferences, papers, open source, customer/user evidence, investor/analyst views, and leader/key-person viewpoints.
 
 ### Stage 4: Strategy Agenda
 
@@ -154,6 +175,7 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
    - Return a two-part outline with slide titles and one claim per slide.
    - Get user approval before generating slides or PPTX.
    - For deep 30-40 page decks, do not stop after producing only an outline unless the user explicitly asked for an outline-only checkpoint. If the output is only an early outline, label it clearly as `preliminary outline, not deep analysis yet` and continue with research or ask whether to continue.
+   - Update the visible plan after the outline is accepted or revised.
 
 ### Stage 6: Slide Plan
 
@@ -170,6 +192,7 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
    - After generating, copy final images into the project output directory and keep the prompt files next to them. Do not leave the only prompt copy hidden in the chat transcript.
    - Render a contact sheet and inspect against the quality gates before delivery.
    - In the delivery summary, always tell the user where the source workspace is, where the reusable materials are, where the slide plan and per-slide prompts are, and how to request an incremental revision.
+   - Update the visible plan after image generation, PPTX packaging, and QA are complete.
 
 ### Stage 8: Revise
 
