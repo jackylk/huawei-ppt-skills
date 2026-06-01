@@ -184,12 +184,15 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - For insight pages, start from a small set of core viewpoints. Write one overview page of these viewpoints, then use customer pain points, vendor product evidence, academic/open-source trends, and investor/analyst/customer quotes to support each viewpoint.
    - For strategy pages, every architecture, scenario, and key technology page must visibly derive from a prior insight. Avoid service introductions unless they explain a technical lever, competitive capability, or required new capability.
    - Persist the slide plan as a user-editable source of truth. The user may directly edit a slide claim, evidence list, layout instruction, or imagegen prompt and ask to regenerate only that page.
+   - Do not let a slide plan remain at the level of `title + claim + layout type`. For high-density planning decks, each slide brief must contain enough concrete content to render a strong page: exact diagram nodes, evidence blocks, labels, metrics, comparison dimensions, source notes, and the bottom judgment text.
+   - Before generation, expand each slide brief into a page-level content spec. A prompt that only says "四象限矩阵" or "八层架构" without concrete quadrant/layer labels, supporting evidence, and visual hierarchy is not acceptable.
 
 ### Stage 7: Generate
 
    - Generate every final slide as one full-slide imagegen PNG. This skill has one output path: full-page imagegen slides assembled into PPTX.
    - Do not switch to editable/native PPTX, hybrid rebuilds, or post-composited page construction just because a packaging dependency is missing.
    - For imagegen decks, write one prompt file per slide before generation. Use stable filenames such as `prompts/slide-01.md` or `prompts/slide-01.json`.
+   - Each per-slide prompt must be a full page specification, not a short title/claim stub. It must include title, subtitle, page layout zones, concrete diagram/table contents, evidence/source blocks, bottom viewpoint, and visual density instructions.
    - After generating, copy final images into the project output directory and keep the prompt files next to them. Do not leave the only prompt copy hidden in the chat transcript.
    - Render a contact sheet and inspect against the quality gates before delivery.
    - In the delivery summary, always tell the user where the source workspace is, where the reusable materials are, where the slide plan and per-slide prompts are, and how to request an incremental revision.
@@ -360,6 +363,9 @@ Every slide brief needs:
 - black or dark-red judgment title
 - short dark-gray subtitle when useful
 - proof object: chart, comparison matrix, architecture diagram, roadmap, or control-flow
+- concrete diagram/table content: node names, arrows, layer labels, row/column labels, metrics, or scenario steps
+- 2-4 evidence blocks or source-backed facts on insight pages
+- 3-5 architecture/technology explanation bullets on strategy pages
 - restrained Huawei-red conclusion treatment: thin red line, pale-red callout, red left bar, or small red label
 - source notes or screenshot/material references for insight pages
 - top-right chapter tag for long decks
@@ -385,6 +391,62 @@ For 30-40 page technical planning decks, do not write insights as a source list.
 5. **Customer and buy-point analysis:** Distinguish what customers can self-build, what they still need vendors for, and what they are willing to pay for.
 
 When using quotes, keep them short and attributable. Prefer primary sources: official docs/blogs, conference talks, papers, GitHub repos, customer interviews/reviews, analyst/investor reports, and leader/key-engineer posts.
+
+## Page Density and Visual Quality
+
+High-density technical planning pages should look like serious architecture/strategy pages, not sparse lecture slides.
+
+For each non-cover/non-directory slide:
+
+- Use at least one strong proof object: architecture stack, flow diagram, mechanism diagram, matrix, quantified comparison, roadmap, evidence board, or decision tree.
+- Include 6-12 meaningful content units across the page: diagram nodes, table cells, evidence cards, metric chips, scenario steps, or capability blocks.
+- Prefer a left visual/right judgment layout, a top evidence/bottom mechanism layout, or a central architecture with side explanation. Avoid a mostly empty canvas with 3-5 floating boxes.
+- Use concrete labels. Replace vague nodes like `输入层 Router` with richer mechanism labels such as `意图包解析`, `权限票据校验`, `执行体路由`, `回执验证`, `失败回滚`.
+- Insight pages should show evidence and interpretation together: source signal -> what it proves -> strategic judgment.
+- Strategy pages should show mechanism and build target together: architecture position -> hard technical point -> measurable target.
+- Key-technology pages must include problem, mechanism, architecture position, hard points, metrics, and build plan; a single router diagram is not enough.
+- Avoid generic decorative diagrams, oversized titles, low text density, and empty whitespace. If the page reads as "one idea with a few boxes", revise the prompt before delivery.
+
+Contact sheet inspection must check for density and visual richness. If many pages look sparse, text-light, or diagram-poor, regenerate those pages with stronger prompts before presenting the deck as complete.
+
+## Full-Page Imagegen Prompt Requirements
+
+The per-slide prompt is the source code for the visual page. It must be detailed enough that imagegen can draw the full page without guessing.
+
+Each prompt should include:
+
+```text
+Use case / asset type / style
+Top-right chapter tag
+Title and subtitle
+Claim: one sharp judgment
+Layout zones: exact left/right/top/bottom structure with proportions
+Main proof object: exact diagram/table/matrix content, including node labels, arrows, layers, axes, metrics, or scenario steps
+Evidence blocks: source-backed facts or quoted signals to place on the page
+Right-side or bottom interpretation: 3-5 concise judgment bullets
+Bottom viewpoint: exact one-sentence conclusion
+Visual density: high-density Huawei technical planning page; avoid sparse layout, avoid oversized empty cards, use 6-12 content units
+Text discipline and red discipline
+```
+
+Bad prompt:
+
+```text
+Layout type: 八层架构
+Title: 总体架构
+Main claim: 四个对象是关键。
+```
+
+Good prompt:
+
+```text
+Layout: left 62% eight-layer architecture stack, right 32% key object cards, bottom restrained red viewpoint.
+Architecture layers from bottom to top: 多端输入采集、事件标准化、上下文快照、意图包解析、权限票据、Agent 路由、执行回执、个性化记忆.
+Show red arrows from 意图包 -> 权限票据 -> Agent 路由 -> 执行回执.
+Right cards: 意图包=目标/约束/上下文引用; 上下文快照=可授权/可过期/可追溯; 权限票据=最小授权/风险分级; 执行回执=结果/失败原因/下一步确认.
+Evidence strip: Apple App Intents, Microsoft Click to Do, Gemini Live screen sharing.
+Bottom viewpoint: 没有对象协议，输入法只能做文本增强；有对象协议，输入层才能成为 Agent 控制面。
+```
 
 ## Competitor Analysis Page Pattern
 
@@ -519,9 +581,13 @@ Style: Huawei-like white/red technical report, white background, black title, da
 Layout type: <insight matrix | left architecture + right explanation | roadmap | key technology mechanism>
 Title in black: <title>
 Subtitle in dark gray: <subtitle>
-Main visual: <diagram/table/chart instructions>
-Right/Bottom explanation: <short Chinese text blocks only>
+Claim: <one sharp judgment>
+Layout zones: <specific left/right/top/bottom structure and proportions>
+Main visual: <diagram/table/chart instructions with exact node labels, layers, arrows, rows/columns, metrics, or steps>
+Evidence blocks: <2-4 source-backed facts or source labels if insight page>
+Right/Bottom explanation: <3-5 concise judgment bullets or technical build bullets>
 Bottom viewpoint treatment: restrained Huawei-red callout, preferably pale-red background with thin red border or red left bar; avoid thick red frames and large solid red areas.
+Visual density: high-density Huawei technical planning page, 6-12 meaningful content units, avoid sparse layout and oversized empty cards.
 Text discipline: all Chinese text must be legible, no fake characters, no title numbering, no page number near title.
 ```
 
@@ -555,11 +621,15 @@ or use an available fallback such as `pptxgenjs` only to place each PNG/JPG full
 Before delivery:
 
 - Each slide has one claim, one proof object, and one bottom viewpoint.
+- Each non-cover/non-directory slide has concrete page content, not only a title/claim/layout type.
+- Each non-cover/non-directory prompt specifies exact visual content: diagram nodes, table labels, evidence blocks, explanation bullets, and bottom judgment.
 - Insight pages contain evidence plus judgment, not raw information lists.
 - Strategy pages use left visual/right explanation unless another structure is clearly better.
+- Strategy and key-technology pages contain architecture/mechanism diagrams with enough labels to explain how the system works.
 - Normal content boxes use gray outlines; red is reserved for thesis, arrows, selected labels, and restrained conclusion treatments.
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo.
 - Imagegen output: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
+- Contact sheet inspection rejects sparse pages, text-light pages, pages without real proof objects, and pages with excessive empty whitespace.
 - Final PPTX pages are image-based full-slide pages; do not silently substitute native editable PPT shapes.
 - Delivery summary includes PPTX, contact sheet, source workspace, reusable materials, slide plan, prompt files, and iteration instructions.
