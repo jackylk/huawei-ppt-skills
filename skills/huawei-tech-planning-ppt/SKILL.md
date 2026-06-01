@@ -156,6 +156,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Record source URLs, dates, and why each source matters.
    - Convert research into one-theme insight claims; do not make a slide just because a source exists.
    - Use `references/research-assets.md` for the asset workflow.
+   - Use the Deep Research Matrix below. Cover market/category, customers/users, technology trends, competitors/incumbents, startups, academic/open-source, investor/analyst views, and key-person viewpoints unless the user explicitly narrows the scope.
    - For rapidly changing topics, research recent product releases, conference announcements, roadmap signals, X posts by company leaders/key engineers, startup launches, open source projects, academic papers, customer pain points, consulting reports, and investor views.
    - Preserve reusable source material under a stable research directory: raw pages, extracted text, screenshots, product screenshots, chart images, quote snippets, and a material index. Future revisions should enrich this repository rather than restart research.
    - Separate page screenshots from true product screenshots. Product screenshots must come from official docs, official blogs, demos, or other attributable sources. Do not let image generation invent competitor product UIs.
@@ -217,6 +218,7 @@ For deep technical planning decks, the agent must pass this gate before presenti
 
 Minimum evidence coverage:
 
+- **Market/category analysis:** category definition, market timing, adoption drivers, ecosystem shifts, business model/buying center, and where value migrates.
 - **Category history:** past state, current transition, future inflection, and why the timing matters.
 - **Major incumbents/platforms:** representative leaders in the domain, including product releases, architecture direction, and public roadmap/conference signals.
 - **Cloud/platform vendors:** domestic and international where relevant.
@@ -241,6 +243,38 @@ If research is not sufficient, say so explicitly and continue researching. Do no
 ```
 
 For a user who asks "都做了调研了吗" or challenges depth, audit the research against this gate and list what is complete, what is missing, and what you will research next.
+
+## Deep Research Matrix
+
+For a deep planning deck, produce and save `research/deep-research-matrix.md` or an equivalent section in `research/synthesis.md`. Each row should connect raw signals to planning conclusions.
+
+Required dimensions:
+
+| Dimension | What to research | Minimum output |
+| --- | --- | --- |
+| 市场/品类 | category boundary, market timing, adoption drivers, value-chain shift, buying center, monetization/budget owner | 2-4 hard judgments about why now, where value migrates, and what becomes commoditized |
+| 客户/用户/买点 | personas, jobs-to-be-done, pain transfer, self-build boundary, willingness-to-pay, procurement blockers, security/trust concerns | customer segmentation, buy-point analysis, self-build vs vendor-dependent boundary |
+| 技术趋势 | architecture evolution, model/tool/runtime changes, benchmarks, standards/protocols, infra constraints, security/privacy techniques | technical inflection points and what core technologies must be mastered |
+| 友商/平台 | incumbents, cloud vendors, OS/platform players, product releases, conference signals, roadmaps, pricing/packaging if relevant | competitor route map, architecture/mechanism redraw, threat/opportunity judgment |
+| Startup/新进入者 | new product routes, funding, traction, wedge use case, technical differentiation, go-to-market | which startup route may disrupt incumbents and which capabilities are real vs demo |
+| 学术/开源 | papers, benchmarks, datasets, GitHub projects, protocols, communities, reproducibility limits | what is becoming technically feasible and what remains unsolved |
+| 投资/咨询/分析师 | a16z/VC reports, Gartner/IDC/Forrester or domain analysts, market maps, enterprise adoption surveys | external category framing and investment thesis; validate or challenge internal thesis |
+| 关键人物观点 | X posts, talks, interviews, blogs by founders, researchers, platform leaders, customer CTOs | direct quotes or paraphrased viewpoints that reveal strategic direction |
+
+For each dimension, write:
+
+```text
+Source signals -> What changed -> Customer/market pain -> Technical mechanism -> Competitive implication -> Slide ids
+```
+
+Minimum expectations:
+
+- Do not let one famous vendor dominate the research. Include incumbents, platform players, startups, and open-source/academic signals where relevant.
+- Customer analysis is not optional. If direct customer evidence is unavailable, use user workflows, public reviews/forums, enterprise adoption reports, or adjacent case studies and label the inference.
+- Technology trend analysis must explain mechanism, not buzzwords.
+- Competitor analysis must explain architecture/product route, not just feature lists.
+- Market analysis must identify value migration and commoditization pressure, not just "market is growing".
+- If a dimension lacks evidence, mark it as a gap and continue researching before final slide generation.
 
 ## Sharp Viewpoint Standard
 
