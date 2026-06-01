@@ -453,7 +453,7 @@ For each non-cover/non-directory slide:
 - Use concrete labels. Replace vague nodes like `输入层 Router` with richer mechanism labels such as `意图包解析`, `权限票据校验`, `执行体路由`, `回执验证`, `失败回滚`.
 - Insight pages should show evidence and interpretation together: source signal -> what it proves -> strategic judgment.
 - Strategy pages should show mechanism and build target together: architecture position -> hard technical point -> measurable target.
-- Key-technology pages must include problem, mechanism, architecture position, hard points, metrics, and build plan; a single router diagram is not enough.
+- Key-technology pages must include problem definition, module decomposition, technical principle, data/control flow, core objects/interfaces, evaluation method, quantified targets, competitive threshold, and engineering plan; a single router diagram or capability slogan is not enough.
 - Avoid generic decorative diagrams, oversized titles, low text density, and empty whitespace. If the page reads as "one idea with a few boxes", revise the prompt before delivery.
 
 Contact sheet inspection must check for density and visual richness. If many pages look sparse, text-light, or diagram-poor, regenerate those pages with stronger prompts before presenting the deck as complete.
@@ -563,6 +563,63 @@ Problem -> mechanism -> architecture position -> hard points -> metrics -> build
 ```
 
 Avoid grouping many hard technologies into one generic "关键技术" page in long decks.
+
+## Technical Design Depth
+
+The strategy section must be deep enough to guide the next phase of technical development. Do not write capability slogans or generic technology labels.
+
+For each proposed key technology, include technical design content:
+
+- **Problem definition:** what exact customer/engineering bottleneck this technology solves, why existing approaches fail, and what breaks if it is not built.
+- **Module decomposition:** runtime components, control-plane components, data-plane components, storage/index components, evaluation/ops components.
+- **Technical principle:** how the mechanism works, not only what business capability it achieves.
+- **Data/control flow:** input objects, intermediate states, decision points, tool calls, execution path, output/feedback path.
+- **Core objects and interfaces:** schemas, APIs, protocols, tickets, manifests, DAG nodes, events, context objects, policy objects, or memory objects.
+- **Algorithms or mechanisms:** retrieval/ranking, planning, routing, scheduling, sandboxing, permission checking, consistency, rollback, evaluation, cost control, or model selection.
+- **State management:** what is persisted, what is ephemeral, lifecycle, TTL, versioning, lineage, replay, audit, and conflict handling.
+- **Failure and safety design:** guardrails, fallback, human confirmation, risk levels, rollback, observability, and incident handling.
+- **Evaluation method:** benchmark, offline test set, online experiment, replay test, red-team test, customer task success metric, or operational metric used to judge whether the technology is good.
+- **Quantified targets:** accuracy, latency, throughput, scale, cost, automation rate, human intervention rate, reliability, privacy/governance coverage, benchmark score.
+- **Competitive threshold:** table-stakes target, competitive target, and leading target where possible.
+- **Engineering plan:** MVP scope, platform dependencies, build milestones, reusable internal assets, new capability gaps, and validation experiments.
+
+Each key-technology slide should have a concrete mechanism diagram, for example:
+
+```text
+Input/Event -> Normalization -> Context/State -> Planner/Policy -> Tool/Runtime -> Verification -> Feedback/Memory
+```
+
+or a module/interface diagram:
+
+```text
+API / Object schema / Control plane / Runtime / Storage / Evaluation / Ops
+```
+
+Weak technology claims to avoid:
+
+- `构建多模态能力`
+- `提升上下文理解`
+- `加强安全治理`
+- `优化 Agent 调度`
+- `建设评测体系`
+
+Rewrite them as technical mechanisms:
+
+- `多模态事件流：把语音、文本、屏幕、视觉、位置统一为带时间戳、设备态、授权域和置信度的 InputEvent schema。`
+- `上下文快照：将屏幕、App 状态、剪贴板、历史意图、用户偏好组织为可引用、可过期、可脱敏的 ContextSnapshot。`
+- `权限票据：用最小授权 token 绑定数据范围、动作范围、风险级别、TTL 和回执要求。`
+- `执行回执：要求每个 Agent Action 返回结果、证据、失败原因、回滚建议和下一步确认。`
+
+Before generation, audit every key-technology page. If it cannot tell an engineer what modules to build and how they interact, revise the slide brief and prompt.
+
+Every key-technology slide must answer these four questions visibly:
+
+```text
+1. 解决什么问题？What bottleneck or failure mode does it remove?
+2. 技术原理是什么？What mechanism makes it work?
+3. 怎么评价好坏？What benchmark, metric, experiment, or operational signal judges it?
+4. 做到什么程度才有竞争力？What quantified table-stakes / competitive / leading targets apply?
+```
 
 ## Customer, User, and Buy-Point Analysis
 
@@ -675,6 +732,7 @@ Before delivery:
 - Insight pages contain evidence plus judgment, not raw information lists.
 - Strategy pages use left visual/right explanation unless another structure is clearly better.
 - Strategy and key-technology pages contain architecture/mechanism diagrams with enough labels to explain how the system works.
+- Key-technology pages are technical-design-grade: they show the problem being solved, modules, interfaces/objects, flow, mechanisms, state, failure handling, evaluation method, quantified targets, competitive threshold, and development implications.
 - Normal content boxes use gray outlines; red is reserved for thesis, arrows, selected labels, and restrained conclusion treatments.
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo.
