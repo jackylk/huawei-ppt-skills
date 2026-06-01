@@ -163,6 +163,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Treat research and slide writing as auditable artifacts. Save synthesis notes, slide claims, and imagegen prompts in reviewable Markdown/JSON files so the user can inspect or edit them before regeneration.
    - Do not treat a quick web scan or a list of major vendors as "deep research". For long-form planning decks, Stage 3 must pass the research sufficiency gate below before writing the final outline or claiming the insight work is complete.
    - Update the visible plan when each research group is completed: vendors, conferences, papers, open source, customer/user evidence, investor/analyst views, and leader/key-person viewpoints.
+   - Research must produce sharp judgments, not neutral summaries. For every major insight, write the evidence chain, the opposing interpretation, why the chosen judgment is stronger, and what strategic action follows.
 
 ### Stage 4: Strategy Agenda
 
@@ -229,7 +230,7 @@ Recommended artifact expectations for a 30-40 page deck:
 
 - `research/source-registry.json` contains enough sources to support every major section, not just 5-8 headline links.
 - `research/material-index.md` groups sources by theme and explains why each source matters.
-- `research/synthesis.md` contains evidence-backed viewpoints, not only summaries.
+- `research/synthesis.md` contains evidence-backed, opinionated viewpoints, not only summaries.
 - `planning/insight-claims.md` maps each core viewpoint to evidence from at least two source types where possible.
 - Competitor pages have official screenshots/charts or clearly labeled page evidence plus redrawn architecture/mechanism diagrams.
 
@@ -240,6 +241,54 @@ If research is not sufficient, say so explicitly and continue researching. Do no
 ```
 
 For a user who asks "都做了调研了吗" or challenges depth, audit the research against this gate and list what is complete, what is missing, and what you will research next.
+
+## Sharp Viewpoint Standard
+
+Deep technical planning decks need hard judgments. Do not write safe, neutral, encyclopedic pages.
+
+Every core viewpoint should pass this test:
+
+```text
+Observation: what changed in the market/technology/customer behavior?
+Contradiction: what old assumption is now wrong?
+Evidence chain: which customer, vendor, product, paper, open-source, or investor signals prove it?
+Opposing view: what would a reasonable skeptic argue?
+Judgment: what is the sharper conclusion?
+Strategic implication: what should we build, avoid, or measure?
+```
+
+Good viewpoint language:
+
+- `只做 AI 写作会被 OS 级能力商品化，输入法必须上移为意图与上下文控制面。`
+- `入口不是护城河，能安全调度任务并拿到回执才是护城河。`
+- `多模态不是功能清单，而是把用户意图从文本流升级为可授权的上下文流。`
+
+Weak viewpoint language to avoid:
+
+- `AI 输入法发展迅速。`
+- `各厂商都在布局智能助手。`
+- `需要提升用户体验和安全能力。`
+- `未来值得关注多模态和隐私。`
+
+If a slide title or claim could appear in any generic industry report, rewrite it. A good slide claim should force a strategic choice, expose a contradiction, or name a competitive gap.
+
+## Research Analysis Method
+
+Do not stop at collecting sources. Convert sources into analysis:
+
+1. Cluster sources by theme, not by vendor list.
+2. Identify the shift: past optimization target -> current competition point -> future control point.
+3. Find the conflict: incumbent route vs startup route, OS platform vs third-party product, customer self-build vs vendor-paid capability, open source vs commercial moat.
+4. Extract the technical mechanism behind product announcements; redraw what is happening architecturally.
+5. Derive the build thesis: what core technology must be mastered, what level is table stakes, what level is leading.
+
+For every major section, produce a short "观点推导表":
+
+```text
+Source signals -> What they prove -> Contradiction -> Judgment -> Strategy response -> Slide ids
+```
+
+If the analysis cannot fill this table, keep researching before generating slides.
 
 ## Example First Response
 
