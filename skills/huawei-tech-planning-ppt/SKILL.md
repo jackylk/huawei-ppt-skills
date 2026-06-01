@@ -141,6 +141,7 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
    - Separate page screenshots from true product screenshots. Product screenshots must come from official docs, official blogs, demos, or other attributable sources. Do not let image generation invent competitor product UIs.
    - For competitor/technology pages, first understand the architecture and mechanism, then redraw the key technical principle in the deck. Use original screenshots as evidence and the redrawn diagram as interpretation.
    - Treat research and slide writing as auditable artifacts. Save synthesis notes, slide claims, and imagegen prompts in reviewable Markdown/JSON files so the user can inspect or edit them before regeneration.
+   - Do not treat a quick web scan or a list of major vendors as "deep research". For long-form planning decks, Stage 3 must pass the research sufficiency gate below before writing the final outline or claiming the insight work is complete.
 
 ### Stage 4: Strategy Agenda
 
@@ -152,6 +153,7 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
 
    - Return a two-part outline with slide titles and one claim per slide.
    - Get user approval before generating slides or PPTX.
+   - For deep 30-40 page decks, do not stop after producing only an outline unless the user explicitly asked for an outline-only checkpoint. If the output is only an early outline, label it clearly as `preliminary outline, not deep analysis yet` and continue with research or ask whether to continue.
 
 ### Stage 6: Slide Plan
 
@@ -180,6 +182,37 @@ Treat this skill as a multi-stage workflow. Keep track of which stage the user i
    - Use `references/revision-flow.md` for routing.
 
 For the detailed question bank, use `references/question-flow.md`.
+
+## Research Sufficiency Gate
+
+For deep technical planning decks, the agent must pass this gate before presenting the main deck outline as a serious planning result.
+
+Minimum evidence coverage:
+
+- **Category history:** past state, current transition, future inflection, and why the timing matters.
+- **Major incumbents/platforms:** representative leaders in the domain, including product releases, architecture direction, and public roadmap/conference signals.
+- **Cloud/platform vendors:** domestic and international where relevant.
+- **Startup/new entrants:** recent companies, funding/product launches, or emerging product routes.
+- **Academic and open-source signals:** papers, benchmarks, datasets, GitHub projects, standards, protocols, or technical communities.
+- **Customer/user/buy-point evidence:** pain points, workflows, willingness-to-pay, self-build boundary, and adoption blockers.
+- **Investor/consulting/analyst views:** when available, to validate market direction and category framing.
+- **Leader/key-person viewpoints:** X posts, talks, interviews, blogs, or public statements when relevant and accessible.
+
+Recommended artifact expectations for a 30-40 page deck:
+
+- `research/source-registry.json` contains enough sources to support every major section, not just 5-8 headline links.
+- `research/material-index.md` groups sources by theme and explains why each source matters.
+- `research/synthesis.md` contains evidence-backed viewpoints, not only summaries.
+- `planning/insight-claims.md` maps each core viewpoint to evidence from at least two source types where possible.
+- Competitor pages have official screenshots/charts or clearly labeled page evidence plus redrawn architecture/mechanism diagrams.
+
+If research is not sufficient, say so explicitly and continue researching. Do not imply the deck is substantially done. Use wording like:
+
+```text
+当前只是第一轮方向性调研，还没有达到深度技术规划标准。下一步我会补齐：竞品/云厂商/startup/学术开源/客户买点/投资观点/关键人物观点，并把证据合并到现有 research 目录。
+```
+
+For a user who asks "都做了调研了吗" or challenges depth, audit the research against this gate and list what is complete, what is missing, and what you will research next.
 
 ## Example First Response
 
