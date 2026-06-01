@@ -1,15 +1,16 @@
 # Huawei PPT Skills
 
-这是两个可复用的华为风格中文 PPT skills，适合在 Codex 中做企业汇报页、技术规划页、架构页和 imagegen 图片页 PPTX。
+这是三个可复用的中文 PPT skills，适合在 Codex 中做企业汇报页、技术规划页、架构页和 imagegen 图片页 PPTX。
 
 ## 包含的 Skill
 
 - `huawei-style-ppt`：通用华为风格白/红/灰企业汇报页，适合做管理汇报、架构说明、能力矩阵、路线图等。
 - `huawei-tech-planning-ppt`：深度技术规划 PPT，强调“洞察 -> 策略”，包含深度调研、友商分析、客户/买点分析、关键技术展开、源码工作区和迭代修改流程。
+- `global-tech-strategy-ppt`：全球科技战略咨询风技术规划 PPT，继承 `huawei-tech-planning-ppt` 的叙事、调研和写作结构，但视觉风格改为国际咨询/科技战略报告风，适合高密度市场洞察、技术趋势、竞品路线、架构规划和 2-3 年技术投资决策。
 
 ## 如何在 Codex 中安装
 
-> 请帮我安装这个 Codex skill 仓库：https://github.com/jackylk/huawei-ppt-skills 。如果我有访问权限，请 clone 到本地，把 `skills/huawei-style-ppt` 和 `skills/huawei-tech-planning-ppt` 复制到 `~/.codex/skills/`，安装 `python-pptx` 依赖，然后告诉我需要重启 Codex 才能使用。
+> 请帮我安装这个 Codex skill 仓库：https://github.com/jackylk/huawei-ppt-skills 。如果我有访问权限，请 clone 到本地，把 `skills/huawei-style-ppt`、`skills/huawei-tech-planning-ppt` 和 `skills/global-tech-strategy-ppt` 复制到 `~/.codex/skills/`，安装 `python-pptx` 依赖，然后告诉我需要重启 Codex 才能使用。
 
 前提：这个仓库当前是私有仓库，同事需要先获得 GitHub 访问权限，并且本机 `git` 能拉取该仓库。
 
@@ -20,6 +21,7 @@ git clone https://github.com/jackylk/huawei-ppt-skills.git
 mkdir -p ~/.codex/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.codex/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.codex/skills/
+cp -R huawei-ppt-skills/skills/global-tech-strategy-ppt ~/.codex/skills/
 python3 -m pip install python-pptx
 ```
 
@@ -33,6 +35,10 @@ Use $huawei-style-ppt 做一个华为风格企业汇报 PPT。
 
 ```text
 Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT，30-40 页，必须用 imagegen 生成整页高信息密度图片页并合成 PPTX。请先问我写作方向、调研重点、已有观点、信息密度和决策用途；调研要充分，观点要犀利，策略要能指导未来 2-3 年技术构建，关键技术页要写到技术设计级别，包括要解决的问题、技术原理、模块/接口/流程、评价方法和量化目标。
+```
+
+```text
+Use $global-tech-strategy-ppt 帮我做一个 XXX 主题的技术规划 PPT，30-40 页，必须用 imagegen 生成整页高信息密度图片页并合成 PPTX。叙事结构保持“洞察 -> 策略”，请先问我写作方向、调研重点、已有观点、信息密度和决策用途；调研要充分，观点要犀利，视觉风格采用全球科技战略咨询报告风。
 ```
 
 ## Claude Code 是否能用
@@ -49,11 +55,12 @@ git clone https://github.com/jackylk/huawei-ppt-skills.git
 mkdir -p ~/.claude/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.claude/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.claude/skills/
+cp -R huawei-ppt-skills/skills/global-tech-strategy-ppt ~/.claude/skills/
 ```
 
 ## PPTX 打包依赖
 
-两个 skill 都带有 `scripts/make_image_pptx.py`，用于把一组 `slide-01.png`、`slide-02.png` 图片页打包成 16:9 PPTX。
+技术规划类 skill 带有 `scripts/make_image_pptx.py`，用于把一组 `slide-01.png`、`slide-02.png` 图片页打包成 16:9 PPTX。
 
 依赖：
 
@@ -63,7 +70,7 @@ python3 -m pip install python-pptx
 
 ## 技术规划 PPT 的迭代工作区
 
-`huawei-tech-planning-ppt` 会要求生成可复用的源码工作区，而不是只给一个最终 PPTX：
+`huawei-tech-planning-ppt` 和 `global-tech-strategy-ppt` 都会要求生成可复用的源码工作区，而不是只给一个最终 PPTX：
 
 ```text
 outputs/<deck-name>/
