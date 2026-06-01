@@ -187,7 +187,8 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 
 ### Stage 7: Generate
 
-   - Choose editable, imagegen, or hybrid route.
+   - Use the imagegen route by default and for this skill's primary workflow. Final PPT pages should be full-slide imagegen PNGs assembled into PPTX.
+   - Respect the imagegen route. Do not switch to editable/native PPTX just because a packaging dependency is missing.
    - For imagegen decks, write one prompt file per slide before generation. Use stable filenames such as `prompts/slide-01.md` or `prompts/slide-01.json`.
    - After generating, copy final images into the project output directory and keep the prompt files next to them. Do not leave the only prompt copy hidden in the chat transcript.
    - Render a contact sheet and inspect against the quality gates before delivery.
@@ -261,14 +262,21 @@ After the user answers, ask the next stage about strategy output: target archite
 
 ## Output Route
 
-Choose one route before building:
+This skill uses the **imagegen route** for final deck pages because the goal is a polished Huawei-style technical planning PPT.
 
-- **Editable PPTX route:** Use for serious delivery, text accuracy, review cycles, or dense Chinese content. Build native PowerPoint shapes, text, tables, and diagrams. Imagegen may be used only for visual references.
-- **Imagegen route:** Use for quick style exploration, visual concept pages, or when the user explicitly asks for generated slide images. Keep Chinese text short because imagegen may distort small text.
-- **Imagegen evidence route:** When the user asks for imagegen but the deck contains competitor evidence, generate the slide layout, rewritten architecture/principle diagram, and judgment area with imagegen; then composite official screenshots/charts into reserved placeholders. Do not use imagegen to fabricate product UI screenshots.
-- **Hybrid route:** Generate a visual reference page, then rebuild all critical Chinese text and diagrams as editable PPT objects.
+- Generate each slide as a full-slide PNG with imagegen, then assemble images into a 16:9 PPTX.
+- Keep the thinking layer editable through `planning/*.md` and `prompts/slide-XX.md`; the final PPT pages themselves are image-based.
+- When the deck contains competitor evidence, use the imagegen evidence route: generate the slide layout, rewritten architecture/principle diagram, and judgment area with imagegen; then composite official screenshots/charts into reserved placeholders. Do not use imagegen to fabricate product UI screenshots.
+- If the user asks for editable-native PPT, explain that this skill is optimized for imagegen output and suggest using a different presentation/editable-PPT workflow instead.
+- If the user asks to compare imagegen and non-imagegen output, make imagegen the primary deliverable and clearly label any editable sample as a separate comparison artifact, not this skill's default route.
 
-If the user asks to compare imagegen and non-imagegen output, produce both with the same claim spine and slide titles so the tradeoff is visible.
+Route discipline:
+
+- A missing packaging dependency such as `python-pptx` is not a reason to change from imagegen to editable PPTX.
+- If `python-pptx` is unavailable, first try to install it when reasonable. If installation is not possible, use another packaging mechanism such as `pptxgenjs` to place each generated slide image full-bleed on a 16:9 slide.
+- When using a packaging fallback for an imagegen deck, keep the deck image-based and tell the user: "打包工具换了，但输出路线仍是 imagegen 图片页 PPTX。"
+- Do not switch to editable/native PPTX inside this skill. If editable PPT is required, hand off to another workflow or create a separate artifact after the imagegen deck.
+- Do not present `pptxgenjs` native shape generation as a substitute for imagegen when the requested route is imagegen.
 
 ## Artifact and Iteration Workflow
 
@@ -535,6 +543,14 @@ python ~/.codex/skills/huawei-tech-planning-ppt/scripts/make_image_pptx.py \
   --output outputs/<deck-name>/imagegen/<deck-name>-imagegen.pptx
 ```
 
+If `python-pptx` is missing, do not switch to editable PPTX. Either install it:
+
+```bash
+python3 -m pip install python-pptx
+```
+
+or use an available fallback such as `pptxgenjs` only to place each PNG/JPG full-bleed on a blank 16:9 slide. The fallback PPTX should still contain one image per slide.
+
 ## Quality Gates
 
 Before delivery:
@@ -545,6 +561,6 @@ Before delivery:
 - Normal content boxes use gray outlines; red is reserved for thesis, arrows, selected labels, and restrained conclusion treatments.
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo.
-- Editable route: key text remains editable and Chinese text fits inside boxes.
 - Imagegen route: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
+- Final PPTX pages are image-based full-slide pages; do not silently substitute native editable PPT shapes.
 - Delivery summary includes PPTX, contact sheet, source workspace, reusable materials, slide plan, prompt files, and iteration instructions.
