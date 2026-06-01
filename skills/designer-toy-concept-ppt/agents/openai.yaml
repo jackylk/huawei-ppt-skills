@@ -1,0 +1,6 @@
+interface:
+  display_name: "Designer Toy Concept PPT"
+  short_description: "Cute original blind-box concept decks"
+  brand_color: "#F472B6"
+  default_prompt: "Use $designer-toy-concept-ppt 帮我做一个 XXX 主题的概念 PPT，保持洞察到策略的叙事，但视觉采用原创潮玩盲盒角色 + 可选开放授权素材，整页 imagegen 生成。"
+
