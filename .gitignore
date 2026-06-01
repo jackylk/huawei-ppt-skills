@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+venv/
+outputs/
+generated_images/
+*.pptx
+*.png
+*.jpg
+*.jpeg
+*.webp

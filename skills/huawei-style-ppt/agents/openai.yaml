@@ -1,0 +1,5 @@
+interface:
+  display_name: "Huawei Style PPT"
+  short_description: "White/red enterprise PPT slide style"
+  brand_color: "#C7000B"
+  default_prompt: "Use $huawei-style-ppt to create a Huawei-style enterprise technical PPT with imagegen slide pages and package them into a PPTX."
