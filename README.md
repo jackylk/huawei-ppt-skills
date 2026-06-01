@@ -7,7 +7,7 @@
 - `huawei-style-ppt`：通用华为风格白/红/灰企业汇报页，适合做管理汇报、架构说明、能力矩阵、路线图等。
 - `huawei-tech-planning-ppt`：深度技术规划 PPT，强调“洞察 -> 策略”，包含深度调研、友商分析、客户/买点分析、关键技术展开、源码工作区和迭代修改流程。
 
-## 给同事复制到 Codex 的一句话
+## 如何在 Codex 中安装
 
 > 请帮我安装这个 Codex skill 仓库：https://github.com/jackylk/huawei-ppt-skills 。如果我有访问权限，请 clone 到本地，把 `skills/huawei-style-ppt` 和 `skills/huawei-tech-planning-ppt` 复制到 `~/.codex/skills/`，安装 `python-pptx` 依赖，然后告诉我需要重启 Codex 才能使用。
 
