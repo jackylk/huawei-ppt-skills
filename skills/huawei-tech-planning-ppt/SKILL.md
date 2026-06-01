@@ -276,6 +276,78 @@ Minimum expectations:
 - Market analysis must identify value migration and commoditization pressure, not just "market is growing".
 - If a dimension lacks evidence, mark it as a gap and continue researching before final slide generation.
 
+## Market-Customer-Competition-Industry Analysis
+
+For solution or product technical planning, include a structured "四看" analysis. Save it as `research/market-customer-competition-industry.md` or include it in `research/synthesis.md`.
+
+### 1. 看市场
+
+Analyze the market at three levels:
+
+- **宏观市场:** market size/timing, value demand, budget owner, buying center, policy/ecosystem constraints, macro drivers and inhibitors.
+- **细分市场:** target segments, segment boundaries, application scenarios, demand characteristics, competitive needs, adoption maturity, monetization logic.
+- **重点/典型客户:** representative customers or customer archetypes, their current workflow, decision criteria, deployment constraints, and expected value.
+
+Output requirements:
+
+```text
+Segment -> Typical customer -> Scenario -> Value demand -> Required capabilities -> Competitive requirement -> PPT implication
+```
+
+Do not say only "market is growing". Identify which segment is worth entering first, which segment is not attractive, and why.
+
+### 2. 看客户
+
+Analyze typical target customers deeply:
+
+- who the user, buyer, operator, risk owner, and technical decision maker are
+- what task/job they need to complete
+- where the current pain is: cost, efficiency, quality, risk, compliance, integration, skill threshold, reliability, or experience
+- what value the solution creates: revenue, cost reduction, automation, quality improvement, risk reduction, new experience, ecosystem leverage
+- what adoption blockers remain: migration cost, trust, data access, security review, budget, organizational boundary, integration workload
+
+Output requirements:
+
+```text
+Customer archetype -> Current workflow -> Pain point -> Root cause -> Solution value -> Adoption blocker -> Willingness-to-pay signal
+```
+
+### 3. 看竞争
+
+Analyze competition in the target customer market, not as a generic vendor list.
+
+- Compare how competitors satisfy the target market's feature, scenario, integration, trust, and deployment needs.
+- Evaluate competitor product-combination competitiveness, not only single product functions.
+- Extract competitors' key competitive characteristics: architecture route, product packaging, ecosystem position, customer lock-in, pricing/bundling, operation model, and technical moat.
+- Compare competitor product combinations with our product/service combination.
+- Identify our unmet characteristics and derive solution competitiveness requirements.
+
+Output requirements:
+
+```text
+Customer/segment need -> Competitor capability -> Competitor strength -> Our current capability -> Gap -> Required solution competitiveness
+```
+
+Use this to derive strategy pages. Do not write "we should improve competitiveness" without naming the missing capabilities.
+
+### 4. 看行业
+
+Analyze the broader industry environment:
+
+- market development trend and demand migration
+- 产业链/生态位 changes, platform power shifts, standards/protocols, regulation, supply constraints, and channel changes
+- competitive landscape evolution: consolidation, platform bundling, startup disruption, open-source commoditization
+- macro support and constraints: policy, privacy/security, compute cost, model capability, device penetration, developer ecosystem, customer budget cycle
+- future market outlook and what it means for timing, entry point, and investment pacing
+
+Output requirements:
+
+```text
+Industry trend -> Supportive forces -> Constraints -> Competitive landscape change -> Timing implication -> Strategy response
+```
+
+In the insight section, use "四看" evidence to support the core viewpoint overview. In the strategy section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets.
+
 ## Sharp Viewpoint Standard
 
 Deep technical planning decks need hard judgments. Do not write safe, neutral, encyclopedic pages.
