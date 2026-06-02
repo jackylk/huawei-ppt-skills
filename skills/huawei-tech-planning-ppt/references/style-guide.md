@@ -174,7 +174,7 @@ Use for pages titled like `关键技术1：<技术机制>，<竞争力结果>` w
 
 Top:
 - Title is a hard technical claim, for example `关键技术1：基于元上下文锁定和跨步回溯，保障长程任务的可靠运行`.
-- Top-right uses a segmented chapter navigator, not a pill tag. Example segments: `任务书 | 洞察分析 | 技术构想 | 执行策略`.
+- Top-right uses a segmented chapter navigator, not a pill tag. Example segments: `洞察分析 | 技术构想 | 执行策略`.
 - Highlight the current segment in Huawei red. Keep inactive segments white/light gray with thin borders.
 
 Left 48-52%:

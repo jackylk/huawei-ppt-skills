@@ -588,7 +588,7 @@ For key-technology pages, use this expanded prompt shape instead of a generic me
 
 ```text
 Layout type: key technology scenario + competitiveness page
-Top-right segmented navigator: 任务书 | 洞察分析 | 技术构想 | 执行策略, highlight 技术构想 in Huawei red
+Top-right segmented navigator: 洞察分析 | 技术构想 | 执行策略, highlight 技术构想 in Huawei red
 Title: 关键技术X：<technical mechanism>，<competitive outcome>
 Left zone title: <应用场景与诉求>
 Left mechanism diagram: <named agents/modules/states/arrows, including step labels>
@@ -719,7 +719,7 @@ Bottom: restrained red conclusion or page number/footer if required
 The top-right navigator should be a thin segmented tab strip, not a large section label. Example:
 
 ```text
-任务书 | 洞察分析 | 技术构想 | 执行策略
+洞察分析 | 技术构想 | 执行策略
 ```
 
 Highlight the current segment with Huawei red fill or red text, keep inactive tabs white/light gray with thin gray borders.
