@@ -16,6 +16,7 @@ The style is a technical planning report, not a marketing deck.
 - White or very light gray background.
 - Thin gray outer guide lines or section dividers are acceptable.
 - Leave a tight but consistent margin. These decks can be dense, but they are not chaotic.
+- Do not place page numbers inside the generated slide image. Avoid large top-left number blocks such as `04.`; the title should start directly with the claim or section label.
 
 ## Typography
 
@@ -287,6 +288,7 @@ At thumbnail size, each slide should reveal a different proof object and a red a
 
 At readable size, check:
 - title is black and claim-like.
+- no page number is embedded in the generated image, especially no large top-left number block.
 - text is not fake or garbled.
 - dense pages still have grouping and hierarchy.
 - strategy pages visibly use left visual/right explanation.

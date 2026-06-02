@@ -485,6 +485,7 @@ This skill has one output mode: **full-page imagegen slides assembled into a 16:
 - Generate each final slide as a complete full-slide PNG with imagegen. The whole page layout, diagrams, callouts, viewpoint boxes, and visual composition belong in the imagegen prompt.
 - Keep the thinking layer editable through `planning/*.md` and `prompts/slide-XX.md`; the final PPT pages themselves are image-based.
 - Do not offer or choose editable/native PPTX, hybrid rebuilds, or native-shape alternatives inside this skill.
+- Do not put slide numbers inside the generated page image. In particular, never generate a large top-left number block such as `04.` or `12.`. If page numbers are needed, they should be added later by the PPTX wrapper/footer, not by imagegen.
 - If the user asks for editable-native PPT, explain that this skill is optimized for full-page imagegen output and suggest a separate editable-PPT workflow.
 - If the deck contains competitor evidence, still produce the final page through imagegen as a whole page. Use official screenshots/charts as source references when the image tool supports references; otherwise represent evidence with clearly labeled source blocks, redrawn mechanisms, and source notes. Do not fabricate competitor product UIs and call them screenshots.
 
@@ -641,7 +642,7 @@ Evidence blocks: source-backed facts or quoted signals to place on the page
 Right-side or bottom interpretation: 3-5 concise judgment bullets
 Bottom viewpoint: exact one-sentence conclusion
 Visual density: high-density Huawei technical planning page; avoid sparse layout, avoid oversized empty cards, use 6-12 content units
-Text discipline and red discipline
+Text discipline and red discipline, including: no slide number, no large top-left page-number block, no title numbering prefix.
 ```
 
 For key-technology pages, use this expanded prompt shape instead of a generic mechanism prompt:
@@ -876,7 +877,7 @@ Left 48-52%: 应用场景与诉求
 Right 48-52%: 关键竞争力目标
   - 3 metric chips or goal capsules across the top
   - 3-5 numbered technical construction items
-Bottom: restrained red conclusion or page number/footer if required
+Bottom: restrained red conclusion or footer note if required; do not include slide/page numbers inside the image
 ```
 
 The top-right navigator should be a thin segmented tab strip, not a large section label. Example:
@@ -1098,6 +1099,7 @@ Use this only for the imagegen route:
 Use case: productivity-visual
 Asset type: 16:9 full-slide Chinese enterprise technical-planning PPT page, 1920x1080.
 Style: Huawei-like white/red technical report, white background, black title, dark gray subtitle, dense but clean management consulting layout, thin gray frames, red only for emphasis and conclusion, no logo, no watermark, no black panels, no gradient glow.
+Forbidden elements: no slide number anywhere in the image; no large top-left number block; no title numbering prefix such as "04."; no footer page number.
 Layout type: <insight matrix | left architecture + right explanation | roadmap | key technology mechanism>
 Title in black: <title>
 Subtitle in dark gray: <subtitle>
@@ -1108,7 +1110,7 @@ Evidence blocks: <2-4 source-backed facts or source labels if insight page>
 Right/Bottom explanation: <3-5 concise judgment bullets or technical build bullets>
 Bottom viewpoint treatment: restrained Huawei-red callout, preferably pale-red background with thin red border or red left bar; avoid thick red frames and large solid red areas.
 Visual density: high-density Huawei technical planning page, 6-12 meaningful content units, avoid sparse layout and oversized empty cards.
-Text discipline: all Chinese text must be legible, no fake characters, no title numbering, no page number near title.
+Text discipline: all Chinese text must be legible, no fake characters, no title numbering, no slide/page number anywhere in the generated image.
 ```
 
 ## Packaging Image Slides
