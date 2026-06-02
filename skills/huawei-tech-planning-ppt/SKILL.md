@@ -648,6 +648,107 @@ Rules:
 - Final pages are still generated as whole pages by imagegen. If exact official screenshots must appear, use them as image references when supported; otherwise label source evidence clearly and redraw the mechanism instead of fabricating UI screenshots.
 - If only web page screenshots are available, label them as page evidence. Do not call them product UI screenshots.
 
+## Technical Insight Page Template
+
+Use this layout for technology-analysis pages inside the **洞察** part. This is for explaining an observed technology route, mechanism, open-source/academic trend, vendor technical direction, or industry inflection. It is different from a strategy-side key-technology construction page: the purpose here is to prove an insight and extract a planning implication.
+
+### Layout
+
+```text
+Top: judgment title + small top-right segmented navigator
+Left 58-62%: 技术机制图 / 演进图 / 在线离线闭环 / 技术路线图
+Right 34-38%: 关键技术
+  - 2-3 named technology-mechanism blocks
+  - each block has a red heading and compact mechanism bullets
+Bottom or right-bottom: 洞察观点
+```
+
+The top-right navigator should be a thin segmented tab strip. For long decks, default to:
+
+```text
+洞察分析 | 技术构想 | 执行策略
+```
+
+Highlight `洞察分析` on these pages. If the user's reference deck explicitly requires a `任务书` segment, keep it as an optional first tab, but do not add it by default after the user has asked to remove it elsewhere.
+
+### Left Side: Mechanism Visual
+
+The left side should carry the page's proof object. Choose the visual form that best explains the technology being analyzed:
+
+- online/offline self-evolution loop
+- timeline plus architecture mechanism
+- agent control loop
+- evaluation/optimization loop
+- skill/tool/prompt lifecycle
+- model-routing or tool-routing flow
+- data/control-plane architecture
+- protocol or state transition diagram
+
+The left visual can be dense, but it must be readable and purposeful. Use boxes, arrows, timeline markers, loop arrows, source labels, and small metric notes. Avoid decorative diagrams or generic stock illustrations.
+
+### Right Side: Key Technology Writing
+
+The right column title is usually `关键技术`. Use 2-3 blocks. Each block starts with a named mechanism, not a generic category.
+
+Good block headings:
+
+```text
+Skill增量更新（skill patch）
+基于反思的提示词进化（GEPA）
+在线执行轨迹沉淀
+离线评测驱动优化
+权限感知的上下文注入
+工具调用闭环治理
+```
+
+Each bullet starts with a bold mechanism label, then a concrete implementation and implication:
+
+```text
+• 模糊匹配链：采用多策略匹配链进行文本替换，容错 LLM 输出格式变化；
+• 原子化写入：先检测威胁模式，再决定 Skill 内容是否回滚；
+• 结构与大小验证：校验结构完整性和内容大小，避免技能膨胀导致加载性能下降；
+```
+
+Avoid vague wording such as `持续优化能力`, `智能化提升`, `效率更高` unless the mechanism and evidence are named.
+
+### Insight Viewpoint
+
+Every technology insight page must include `洞察观点`. It can be placed in the right-bottom area or as a bottom band across the slide if the right column is crowded.
+
+The viewpoint should answer three questions:
+
+```text
+what changed -> why it matters -> what strategic implication follows
+```
+
+Good pattern:
+
+```text
+洞察① <technology shift>：<mechanism>; <planning implication>.
+洞察② <competition shift>：<why this becomes a differentiator>; <what we must build>.
+```
+
+Example:
+
+```text
+洞察① Agent 在线自进化强调运行时闭环，把反馈出现的模式即时固化为 Skill，提升后续任务执行效率；
+洞察② 离线自进化更适合多对象持续优化，需要和在线自进化配合，形成 Skill / Tool / System Prompt 的长期迭代体系；
+```
+
+### Prompt Template
+
+```text
+Layout type: technical insight mechanism page.
+Top-right segmented navigator: 洞察分析 | 技术构想 | 执行策略, highlight 洞察分析.
+Title: <claim-like insight title>.
+Left mechanism visual: <diagram type, nodes, arrows, timeline/loop labels, source labels, metric notes>.
+Right title: 关键技术.
+Right block 1: <red mechanism heading>; bullets: <mechanism label>：<implementation + implication>; ...
+Right block 2: <red mechanism heading>; bullets: ...
+Insight viewpoint: 2 numbered judgments, placed at right-bottom or bottom band.
+Visual density: high-density Huawei technical planning page, white/light-gray canvas, restrained Huawei red for argument and headings.
+```
+
 ## Narrative Rules
 
 - Do not make an information collage. Every page must answer: "so what?"

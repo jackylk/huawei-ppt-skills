@@ -84,7 +84,40 @@ Evidence zones:
 
 End with a red "技术拐点": branchable databases are becoming agent state infrastructure, not just preview database tooling.
 
-### 2c. Insight Summary Page
+### 2c. Technical Insight Mechanism Page
+
+Use for technology-analysis pages inside the insight section, especially when the slide needs to explain a technical mechanism, route evolution, startup/open-source approach, paper idea, or vendor architecture direction.
+
+Top:
+- Title is a judgment, not a topic label. Example: `洞察：在线和离线两种模式互补，实现 Skill/Tool/系统提示词的全面自进化`.
+- Top-right uses a thin segmented navigator. Default segments: `洞察分析 | 技术构想 | 执行策略`, with `洞察分析` highlighted in Huawei red. Add `任务书` only if the deck-wide reference style explicitly requires it.
+
+Left 58-62%:
+- Use one large technical mechanism visual as the page's proof object.
+- Valid visual forms include online/offline loop, timeline plus mechanism, control loop, evaluation loop, skill/tool/prompt lifecycle, state transition diagram, tool routing flow, architecture mechanism, protocol flow, or research pipeline.
+- The visual should explain the technology's operating principle, not decorate the page.
+- Include named boxes, arrows, loop labels, source labels, and small metric notes where useful.
+
+Right 34-38%:
+- Column title: `关键技术`.
+- Use 2-3 boxed text blocks with red mechanism headings.
+- Each block names one concrete mechanism such as `Skill增量更新（skill patch）`, `基于反思的提示词进化（GEPA）`, `在线执行轨迹沉淀`, `离线评测驱动优化`, or topic-specific equivalents.
+- Bullets start with bold mechanism labels and a colon, then state implementation plus implication:
+  - `模糊匹配链：采用多策略匹配链进行文本替换，容错 LLM 输出格式变化；`
+  - `原子化写入：先检测威胁模式，再决定 Skill 内容是否回滚；`
+  - `结构与大小验证：校验结构完整性和内容大小，避免技能膨胀导致加载性能下降；`
+
+Bottom or right-bottom:
+- Add `洞察观点`.
+- Use 2-3 numbered judgments, or one compact bottom-band judgment.
+- The viewpoint must answer: what changed, why it matters, and what planning implication follows.
+
+Writing form:
+- Use named mechanisms, not generic nouns.
+- Make the right side analytical: mechanism -> why it works -> what limitation or strategic implication follows.
+- Do not write a neutral source summary. The page must end in a viewpoint.
+
+### 2d. Insight Summary Page
 
 Use after the individual insight pages and before strategy pages. It is a bridge page: it condenses competitor, technology, customer, and market insights into the architecture direction.
 
