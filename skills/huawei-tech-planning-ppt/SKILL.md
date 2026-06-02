@@ -223,7 +223,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - For imagegen decks, write one prompt file per slide before generation. Use stable filenames such as `prompts/slide-01.md` or `prompts/slide-01.json`.
    - Each per-slide prompt must be a full page specification, not a short title/claim stub. It must include title, subtitle, page layout zones, concrete diagram/table contents, evidence/source blocks, bottom viewpoint, and visual density instructions.
    - After generating, copy final images into the project output directory and keep the prompt files next to them. Do not leave the only prompt copy hidden in the chat transcript.
-   - Render a contact sheet and inspect against the quality gates before delivery.
+   - Render a contact sheet and inspect against the quality gates before delivery. ImageMagick is optional; if it is unavailable, use `sips`, Python/Pillow, Node/canvas, or another local image tool. Do not skip visual QA just because ImageMagick is missing.
    - In the delivery summary, always tell the user where the source workspace is, where the reusable materials are, where the slide plan and per-slide prompts are, and how to request an incremental revision.
    - Update the visible plan after image generation, PPTX packaging, and QA are complete.
 
@@ -1153,6 +1153,7 @@ Before delivery:
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo.
 - Imagegen output: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
+- Contact sheet creation is mandatory, but ImageMagick is not. Use ImageMagick, `sips`, Python/Pillow, Node/canvas, or a temporary local image script to assemble the overview without modifying original slide images.
 - Contact sheet inspection rejects sparse pages, text-light pages, pages without real proof objects, and pages with excessive empty whitespace.
 - Final PPTX pages are image-based full-slide pages; do not silently substitute native editable PPT shapes.
 - Delivery summary includes PPTX, contact sheet, source workspace, reusable materials, slide plan, prompt files, and iteration instructions.
