@@ -308,6 +308,22 @@ Minimum expectations:
 
 For solution or product technical planning, include a structured "五看" analysis. Save it as `research/five-lens-analysis.md` or include it in `research/synthesis.md`.
 
+Use this order by default:
+
+```text
+看市场 -> 看客户 -> 看竞争 -> 看生态 -> 看学术
+```
+
+Rationale:
+
+- **看市场** first: decide where the value, budget, adoption timing, and segment boundary are.
+- **看客户** second: identify the real jobs, pain points, self-build boundary, and willingness-to-pay.
+- **看竞争** third: assess how competitors satisfy those customer needs and derive our missing competitiveness requirements.
+- **看生态** fourth: judge what open-source, protocols, tools, and developer communities are commoditizing or making reusable.
+- **看学术** fifth: look farther ahead to frontier papers, labs, professors, benchmarks, and exploratory ideas that may shape the next 1-3 years.
+
+This order moves from business value to customer demand, then to competitive gap, ecosystem leverage, and future technical frontier. Change the order only when the user explicitly wants a technology-first or academic-first narrative.
+
 ### 1. 看市场
 
 Analyze the market at three levels:
