@@ -179,7 +179,11 @@ Top:
 
 Left 48-52%:
 - Header: `长程任务应用场景与诉求` or `<topic>应用场景与诉求`.
-- A compact workflow/architecture diagram showing the real execution loop. Use named boxes and numbered arrows.
+- A compact mechanism diagram chosen for the technology itself. Use named boxes and arrows, but do not force a layered workflow.
+- Valid left-side diagram forms include task DAG, dependency graph, state machine, control loop, data-flow, sequence diagram, architecture stack, lifecycle map, version DAG, failure-recovery loop, evaluation loop, or tool-dispatch trace.
+- Pick the diagram form that makes the technology principle easiest to understand. For example, Task Planner should often use a DAG/dependency graph or plan-verify-replan loop; Workspace should use version DAG/branch lifecycle; Guardrails should use risk state machine; Evaluation should use offline-online feedback loop.
+- Keep the left diagram clean. Do not force red numbered anchors on the mechanism diagram, and do not add a separate process-step numbering system such as 1-5 red dots.
+- Use plain arrows, module labels, grouping boxes, and subtle red highlights only where needed. The right-side numbered construction items are the primary numbering system.
 - 3-4诉求 boxes stacked vertically to the right of the diagram or below it.
 - Each诉求 box follows:
   - red header: `诉求一：<demand>`

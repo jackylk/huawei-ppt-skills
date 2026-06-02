@@ -591,7 +591,8 @@ Layout type: key technology scenario + competitiveness page
 Top-right segmented navigator: 洞察分析 | 技术构想 | 执行策略, highlight 技术构想 in Huawei red
 Title: 关键技术X：<technical mechanism>，<competitive outcome>
 Left zone title: <应用场景与诉求>
-Left mechanism diagram: <named agents/modules/states/arrows, including step labels>
+Left mechanism diagram: choose the diagram type that best explains this key technology, not necessarily a strict layered diagram. It may be workflow, task DAG, state machine, control loop, data-flow, sequence diagram, architecture stack, lifecycle map, or failure-recovery loop.
+Left diagram numbering: keep the diagram clean. Do not force red numbered anchors in the left diagram, and do not add a separate 1-5 step numbering system. Use plain arrows, module labels, and subtle highlights instead.
 Left demand boxes:
   诉求一：<demand>; 挑战一：<failure>; 挑战二：<failure>
   诉求二：<demand>; 挑战一：<failure>; 挑战二：<failure>
@@ -708,7 +709,8 @@ Use a split technical-planning layout:
 ```text
 Top: claim title + small top-right segmented chapter navigator
 Left 48-52%: 应用场景与诉求
-  - one mechanism/process diagram showing the current task flow or target architecture
+  - one mechanism/principle diagram chosen for the technology itself; do not force a layered workflow if a DAG, state machine, control loop, data-flow, sequence diagram, lifecycle map, or failure-recovery loop explains the mechanism better
+  - clean mechanism diagram without forced red numbered anchors
   - 3-4诉求 boxes, each with 1-2 concrete challenges
 Right 48-52%: 关键竞争力目标
   - 3 metric chips or goal capsules across the top
@@ -726,14 +728,23 @@ Highlight the current segment with Huawei red fill or red text, keep inactive ta
 
 ### Left Side: 应用场景与诉求
 
-The left side must make the engineering problem concrete before proposing the solution.
+The left side must make the engineering problem concrete before proposing the solution. Choose the visual proof object based on the key technology:
+
+- **Planner / task decomposition:** task DAG, dependency graph, plan-verify-replan loop.
+- **Context / memory / retrieval:** context graph, retrieval pipeline, permission-aware data flow.
+- **Workspace / rollback:** version DAG, branch lifecycle, checkpoint/rollback state machine.
+- **Tool runtime:** tool registry + dispatch control loop + sandbox execution trace.
+- **Guardrails / safety:** risk-state machine, approval gate, blast-radius and rollback loop.
+- **Evaluation / AgentOps:** offline-online evaluation loop, telemetry pipeline, scorecard dashboard.
 
 Include:
 
-- a compact diagram of the actual workflow, control loop, data flow, or agent loop
-- numbered arrows or step labels that correspond to the诉求 boxes
+- a compact diagram of the actual mechanism, workflow, control loop, data flow, DAG, state machine, or lifecycle
+- clean arrows, module labels, and subtle highlights; avoid red numbered dots in the diagram unless the user explicitly asks for cross-reference markers
 - 3-4诉求 boxes such as `诉求一：目标锚定`, `诉求二：中断恢复`, `诉求三：环路干预`, `诉求四：路径纠偏`
 - each诉求 box includes concrete failure modes or user/engineering pain, not vague needs
+- Do not label the left diagram with independent `1,2,3,4,5` process markers. The right-side numbered construction items are sufficient.
+- The left diagram can be redesigned per page. The invariant is not the diagram shape; the invariant is that the left visual explains the mechanism cleanly and the right side explains the numbered construction points.
 
 Writing pattern:
 
