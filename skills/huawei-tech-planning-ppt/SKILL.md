@@ -166,6 +166,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
      - **看学术:** analyze top researchers, labs, universities, papers, benchmarks, and exploratory ideas that may become the next 1-3 year technical frontier.
    - Use the Deep Research Matrix below. Cover market/category, customers/users, technology trends, competitors/incumbents, startups, academic/open-source, investor/analyst views, and key-person viewpoints unless the user explicitly narrows the scope.
    - For rapidly changing topics, research recent product releases, conference announcements, roadmap signals, X posts by company leaders/key engineers, startup launches, open source projects, academic papers, customer pain points, consulting reports, and investor views.
+   - For academic papers, verify metadata during research: paper title, year, authors, institution/lab when relevant, venue/preprint source, URL/DOI/arXiv id, and why the paper matters. Store this in `research/source-registry.json`, `research/paper-registry.md`, or an equivalent auditable file before using it in slide text.
    - Preserve reusable source material under a stable research directory: raw pages, extracted text, screenshots, product screenshots, chart images, quote snippets, and a material index. Future revisions should enrich this repository rather than restart research.
    - Separate page screenshots from true product screenshots. Product screenshots must come from official docs, official blogs, demos, or other attributable sources. Do not let image generation invent competitor product UIs.
    - For competitor/technology pages, first understand the architecture and mechanism, then redraw the key technical principle in the deck. Use original screenshots as evidence and the redrawn diagram as interpretation.
@@ -399,12 +400,15 @@ Analyze academia as an early signal of where the frontier may move before indust
 - new benchmarks, datasets, problem definitions, algorithms, architectures, and evaluation methods
 - exploratory prototypes that reveal a future technical direction even if they are not production-ready
 - gap between academic promise and engineering reality: reproducibility, scale, cost, reliability, safety, data access, and integration limits
+- verify paper metadata before slide generation: exact title, year, first author/key authors, institution/lab when relevant, venue or preprint source, URL/DOI/arXiv id, and source id
 
 Output requirements:
 
 ```text
 Academic signal -> Core idea -> Why it matters -> Engineering gap -> 1-3 year product/architecture implication
 ```
+
+If exact paper metadata cannot be verified, do not show author names or years on the slide. Use a direction card such as `<research direction> -> <technical inspiration>` and keep the source gap visible in the research notes.
 
 In the insight section, use "五看" evidence to support the core viewpoint overview. In the strategy section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets. Treat "看行业" as background inside "看市场" unless the user explicitly asks for a separate industry-policy section.
 
@@ -1154,6 +1158,7 @@ Before delivery:
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo, and no generated/approximate third-party logos. Use plain text names for tools/products unless an official sourced screenshot/chart already contains the logo.
 - Imagegen output: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
+- Any slide showing paper year, author, institution, venue, DOI, or arXiv id must trace to a verified source id in the research registry. If metadata is uncertain, regenerate the slide with paper/direction cards and technical implications instead of guessed author/year details.
 - Contact sheet creation is mandatory, but ImageMagick is not. Use ImageMagick, `sips`, Python/Pillow, Node/canvas, or a temporary local image script to assemble the overview without modifying original slide images.
 - Contact sheet inspection rejects sparse pages, text-light pages, pages without real proof objects, and pages with excessive empty whitespace.
 - Final PPTX pages are image-based full-slide pages; do not silently substitute native editable PPT shapes.
