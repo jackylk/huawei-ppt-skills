@@ -168,6 +168,44 @@ Left:
 Right:
 - bullet groups under "关键技术", "难点", "验证指标".
 
+### 6b. Key Technology Scenario And Competitiveness
+
+Use for pages titled like `关键技术1：<技术机制>，<竞争力结果>` where the goal is to explain one key technology deeply enough to guide construction.
+
+Top:
+- Title is a hard technical claim, for example `关键技术1：基于元上下文锁定和跨步回溯，保障长程任务的可靠运行`.
+- Top-right uses a segmented chapter navigator, not a pill tag. Example segments: `任务书 | 洞察分析 | 技术构想 | 执行策略`.
+- Highlight the current segment in Huawei red. Keep inactive segments white/light gray with thin borders.
+
+Left 48-52%:
+- Header: `长程任务应用场景与诉求` or `<topic>应用场景与诉求`.
+- A compact workflow/architecture diagram showing the real execution loop. Use named boxes and numbered arrows.
+- 3-4诉求 boxes stacked vertically to the right of the diagram or below it.
+- Each诉求 box follows:
+  - red header: `诉求一：<demand>`
+  - 1-2 bullets: `挑战一：<specific failure mode>`, `挑战二：<specific failure mode>`
+
+Right 48-52%:
+- Header: `关键竞争力目标`.
+- Top row has 3 goal capsules. Each capsule combines a number with business/technical meaning, such as `7*24小时 自主工作`, `100+ Agent 协同开发`, `1000+ 工具调用 不丢失目标`.
+- Below the capsules, write 3-5 numbered technical construction items.
+- Each item uses a red numbered headline and black mechanism bullets:
+
+```text
+① <capability action + competitive result>
+• <bold mechanism name>：<specific implementation>, <effect or prevention>;
+• <bold mechanism name>：<runtime/evaluation method>, <threshold or acceptance condition>;
+```
+
+Writing style:
+- The red headline should be action-oriented: `元上下文锁定，避免目标漂移`, `CheckPoint快照，错误恢复时间缩短至毫秒级`, `自适应熔断，打破工具调用死循环`.
+- Start bullets with the mechanism name in bold, then explain the implementation. Avoid vague "提升/增强/优化" language.
+- Use concrete objects: `System prompt`, `缓存层`, `DAG状态图`, `state/memory`, `行为指纹Hashing`, `滑动窗口`, `动态熔断器`, `上下文裁剪`, `过程反馈信号`.
+- Include quantitative or operational thresholds where possible: `每5-10步`, `语义相似度>85%`, `毫秒级恢复`, `短时间超阈值`, `7*24小时`.
+- End the item by tying mechanism to competitive result: less drift, faster recovery, fewer dead loops, lower token waste, better convergence.
+
+This pattern is preferred over generic "关键技术/难点/指标" boxes when a single technology deserves a full design page.
+
 ### 7. Strategy Summary / Roadmap With Governance Gates
 
 Use as the closing strategy page. It can be a roadmap, KPI gate page, investment priority page, or executive summary.

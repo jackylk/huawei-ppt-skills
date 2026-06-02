@@ -584,6 +584,29 @@ Visual density: high-density Huawei technical planning page; avoid sparse layout
 Text discipline and red discipline
 ```
 
+For key-technology pages, use this expanded prompt shape instead of a generic mechanism prompt:
+
+```text
+Layout type: key technology scenario + competitiveness page
+Top-right segmented navigator: 任务书 | 洞察分析 | 技术构想 | 执行策略, highlight 技术构想 in Huawei red
+Title: 关键技术X：<technical mechanism>，<competitive outcome>
+Left zone title: <应用场景与诉求>
+Left mechanism diagram: <named agents/modules/states/arrows, including step labels>
+Left demand boxes:
+  诉求一：<demand>; 挑战一：<failure>; 挑战二：<failure>
+  诉求二：<demand>; 挑战一：<failure>; 挑战二：<failure>
+  诉求三：<demand>; 挑战一：<failure>; 挑战二：<failure>
+  诉求四：<demand>; 挑战一：<failure>; 挑战二：<failure>
+Right zone title: 关键竞争力目标
+Goal capsules: <number + meaning>, <number + meaning>, <number + meaning>
+Technical construction items:
+  ① <red action headline + outcome>
+  • <mechanism name>：<implementation>, <effect/threshold>;
+  • <mechanism name>：<runtime/evaluation method>, <effect/threshold>;
+  ② ...
+Bottom viewpoint: <why this technology becomes a competitive requirement>
+```
+
 Bad prompt:
 
 ```text
@@ -673,6 +696,119 @@ Avoid grouping many hard technologies into one generic "关键技术" page in lo
 ## Technical Design Depth
 
 The strategy section must be deep enough to guide the next phase of technical development. Do not write capability slogans or generic technology labels.
+
+## Key Technology Page Template
+
+For key-technology pages in Huawei technical planning decks, prefer the following reference-derived structure when the slide needs to explain one hard technology in depth.
+
+### Layout
+
+Use a split technical-planning layout:
+
+```text
+Top: claim title + small top-right segmented chapter navigator
+Left 48-52%: 应用场景与诉求
+  - one mechanism/process diagram showing the current task flow or target architecture
+  - 3-4诉求 boxes, each with 1-2 concrete challenges
+Right 48-52%: 关键竞争力目标
+  - 3 metric chips or goal capsules across the top
+  - 3-5 numbered technical construction items
+Bottom: restrained red conclusion or page number/footer if required
+```
+
+The top-right navigator should be a thin segmented tab strip, not a large section label. Example:
+
+```text
+任务书 | 洞察分析 | 技术构想 | 执行策略
+```
+
+Highlight the current segment with Huawei red fill or red text, keep inactive tabs white/light gray with thin gray borders.
+
+### Left Side: 应用场景与诉求
+
+The left side must make the engineering problem concrete before proposing the solution.
+
+Include:
+
+- a compact diagram of the actual workflow, control loop, data flow, or agent loop
+- numbered arrows or step labels that correspond to the诉求 boxes
+- 3-4诉求 boxes such as `诉求一：目标锚定`, `诉求二：中断恢复`, `诉求三：环路干预`, `诉求四：路径纠偏`
+- each诉求 box includes concrete failure modes or user/engineering pain, not vague needs
+
+Writing pattern:
+
+```text
+诉求一：<short demand>
+• 挑战一：<specific failure mode>
+• 挑战二：<specific failure mode>
+```
+
+Good demand examples:
+
+- `诉求一：目标锚定` -> long tasks drift from the initial goal after many steps.
+- `诉求二：中断恢复` -> abnormal interruption loses context or wastes recomputation.
+- `诉求三：环路干预` -> blind retry falls into repeated tool-call loops.
+- `诉求四：路径纠偏` -> wrong-path confidence causes non-convergent execution.
+
+### Right Side: 关键竞争力目标
+
+Start with quantified goal capsules. Each capsule should combine a number and a competitive meaning:
+
+```text
+7*24小时 自主工作
+100+ Agent 协同开发
+1000+ 工具调用 不丢失目标
+```
+
+Then write the technical construction items with this exact style:
+
+```text
+① <red capability headline，包含动作和竞争目标>
+• <bold mechanism name>：<concrete implementation>, <why it works / what it prevents>;
+• <bold mechanism name>：<evaluation or runtime method>, <quantified target or acceptance condition>;
+```
+
+Rules:
+
+- The red numbered headline is not a module name. It is a capability action plus outcome, such as `元上下文锁定，避免目标漂移`.
+- Each bullet starts with a bold technical mechanism name, then uses `：` to explain how it works.
+- Prefer verbs such as `固化`, `注入`, `裁剪`, `对齐`, `拦截`, `熔断`, `回滚`, `校验`, `哈希`, `分离`, `恢复`, `路由`.
+- Combine mechanism + concrete object + effect. Avoid "提升能力" phrasing.
+- Include at least one measurable threshold or operational condition when possible, such as `语义相似度>85%`, `每5-10步`, `毫秒级恢复`, `短时间超阈值`, `7*24小时`.
+- End each item with the reliability/competitiveness effect: prevent drift, shorten recovery, break dead loops, reduce wasted tokens, preserve long-horizon goal, or improve task convergence.
+
+Good writing examples:
+
+```text
+① 元上下文锁定，避免目标漂移
+• 元上下文锁定：将全局目标固化在System prompt或缓存层，作为高权重读取，不随时间推移滑出窗口；
+• 目标语义对齐：每隔5-10步将当前状态与初始目标做语义校验，最终产物语义相似度>85%；
+
+② CheckPoint快照，错误恢复时间缩短至毫秒级
+• DAG状态图与节点分离：将Agent执行行为组织为有向无环图，走完节点自动拦截并保持状态；
+• 提示词状态注入：将执行步骤state/memory作为缓存前置，任务中断重启直接命中；
+
+③ 自适应熔断，打破工具调用死循环
+• 行为指纹Hashing：对工具调用参数和结果组合做哈希，滑动窗口检测重复；
+• 动态熔断器：特定工具调用次数或耗时超过阈值，启动熔断和备选路由；
+
+④ 跨步回溯，让Agent少走弯路/错路
+• 上下文裁剪：评测到异常时，将上下文恢复到错误前步骤；
+• 过程反馈信号：把异常总结为结构化信号拼接至上下文，指导Agent重新路由；
+```
+
+Weak writing to avoid:
+
+- `构建记忆能力，提升长期任务效果。`
+- `加强稳定性，支持复杂任务。`
+- `优化Agent执行，减少错误。`
+- `建设工具调用平台。`
+
+Rewrite as:
+
+```text
+长程目标锚定：将任务目标、约束、验收标准固化为GoalSpec对象，并在每N步做目标对齐校验，目标偏移时触发重规划。
+```
 
 For each proposed key technology, include technical design content:
 
