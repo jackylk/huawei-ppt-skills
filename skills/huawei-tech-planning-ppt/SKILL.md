@@ -223,7 +223,8 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Do not switch to editable/native PPTX, hybrid rebuilds, or post-composited page construction just because a packaging dependency is missing.
    - For imagegen decks, write one prompt file per slide before generation. Use stable filenames such as `prompts/slide-01.md` or `prompts/slide-01.json`.
    - Each per-slide prompt must be a full page specification, not a short title/claim stub. It must include title, subtitle, page layout zones, concrete diagram/table contents, evidence/source blocks, bottom viewpoint, and visual density instructions.
-   - After generating, copy final images into the project output directory and keep the prompt files next to them. Do not leave the only prompt copy hidden in the chat transcript.
+   - Before generating, create `outputs/<deck-name>/imagegen/images/`. After each imagegen call, immediately copy or move the resulting slide image into that workspace directory with a stable name such as `slide-01.png`. Do not leave final slide images only in `~/.codex/generated_images` or any other hidden/global cache directory.
+   - Keep the prompt files next to the deck workspace. Do not leave the only prompt copy hidden in the chat transcript.
    - Render a contact sheet and inspect against the quality gates before delivery. ImageMagick is optional; if it is unavailable, use `sips`, Python/Pillow, Node/canvas, or another local image tool. Do not skip visual QA just because ImageMagick is missing.
    - In the delivery summary, always tell the user where the source workspace is, where the reusable materials are, where the slide plan and per-slide prompts are, and how to request an incremental revision.
    - Update the visible plan after image generation, PPTX packaging, and QA are complete.
@@ -527,10 +528,12 @@ outputs/<deck-name>/
     slide-01.md
     slide-02.md
     ...
-  images/
-    slide-01.png
-    slide-02.png
-    ...
+  imagegen/
+    images/
+      slide-01.png
+      slide-02.png
+      ...
+    <deck-name>-imagegen.pptx
   output/
     <deck-name>.pptx
     contact-sheet.png
@@ -544,7 +547,7 @@ The user must be able to review and modify:
 - per-slide claim/layout/source notes
 - per-slide imagegen prompt
 
-If the user edits `prompts/slide-12.md`, regenerate slide 12 from that prompt, replace `images/slide-12.png` or write a versioned image, rebuild the PPTX, and regenerate the contact sheet. This is a good method for imagegen decks because it makes the otherwise hidden prompt layer explicit and reviewable.
+If the user edits `prompts/slide-12.md`, regenerate slide 12 from that prompt, replace `imagegen/images/slide-12.png` or write a versioned image, rebuild the PPTX, and regenerate the contact sheet. This is a good method for imagegen decks because it makes the otherwise hidden prompt layer explicit and reviewable.
 
 For bigger analysis changes, do not patch only the prompt. Update the chain:
 
@@ -1126,6 +1129,8 @@ Save generated images with zero-padded filenames:
 outputs/<deck-name>/imagegen/images/slide-01.png
 outputs/<deck-name>/imagegen/images/slide-02.png
 ```
+
+The slide images used for packaging and delivery must live in this deck workspace. If the image tool initially writes to `~/.codex/generated_images` or another temporary/cache directory, copy or move the selected final image into `outputs/<deck-name>/imagegen/images/` immediately and use only the workspace copy for PPTX packaging, contact sheets, QA, and delivery summaries.
 
 Then run:
 
