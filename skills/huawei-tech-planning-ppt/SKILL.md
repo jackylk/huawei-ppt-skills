@@ -123,7 +123,7 @@ Example:
 Updated Plan
 └ 页数已调整为40页，进入详细页稿与生成阶段。
   ✔ 建立40页工程和可复用素材库
-  □ 围绕4看完成deep research：看市场/看客户/看竞争/看行业
+  □ 围绕5看完成deep research：看市场/看客户/看竞争/看生态/看学术
   □ 调研厂商、会议、论文、开源、客户和投资观点
   □ 保存来源文本、截图、引用摘录和素材索引
   □ 形成核心洞察、客户/用户场景与买点分析，并和用户共创确认
@@ -158,11 +158,12 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Record source URLs, dates, and why each source matters.
    - Convert research into one-theme insight claims; do not make a slide just because a source exists.
    - Use `references/research-assets.md` for the asset workflow.
-   - Use the **4看** research frame as the default deep-research backbone:
+   - Use the **5看** research frame as the default deep-research backbone:
      - **看市场:** identify target segment, customer boundary, market value demand, macro/segment/key-customer structure, adoption drivers, budget owner, and value migration.
      - **看客户:** analyze typical target customers, workflows, pain points, willingness to pay, self-build boundary, procurement blockers, and what value the solution creates.
      - **看竞争:** compare competitor product portfolios and key features against market/customer needs; identify what competitors satisfy, what we lack, and which competitiveness requirements follow.
-     - **看行业:** analyze market trend, technology trend, industry chain trend, ecosystem constraints, regulatory/security constraints, and future market support or blockers.
+     - **看生态:** analyze open-source projects, developer ecosystem, standards/protocols, toolchains, benchmarks, community adoption, and which capabilities are being commoditized.
+     - **看学术:** analyze top researchers, labs, universities, papers, benchmarks, and exploratory ideas that may become the next 1-3 year technical frontier.
    - Use the Deep Research Matrix below. Cover market/category, customers/users, technology trends, competitors/incumbents, startups, academic/open-source, investor/analyst views, and key-person viewpoints unless the user explicitly narrows the scope.
    - For rapidly changing topics, research recent product releases, conference announcements, roadmap signals, X posts by company leaders/key engineers, startup launches, open source projects, academic papers, customer pain points, consulting reports, and investor views.
    - Preserve reusable source material under a stable research directory: raw pages, extracted text, screenshots, product screenshots, chart images, quote snippets, and a material index. Future revisions should enrich this repository rather than restart research.
@@ -283,7 +284,8 @@ Required dimensions:
 | 技术趋势 | architecture evolution, model/tool/runtime changes, benchmarks, standards/protocols, infra constraints, security/privacy techniques | technical inflection points and what core technologies must be mastered |
 | 友商/平台 | incumbents, cloud vendors, OS/platform players, product releases, conference signals, roadmaps, pricing/packaging if relevant | competitor route map, architecture/mechanism redraw, threat/opportunity judgment |
 | Startup/新进入者 | new product routes, funding, traction, wedge use case, technical differentiation, go-to-market | which startup route may disrupt incumbents and which capabilities are real vs demo |
-| 学术/开源 | papers, benchmarks, datasets, GitHub projects, protocols, communities, reproducibility limits | what is becoming technically feasible and what remains unsolved |
+| 开源生态 | GitHub projects, protocols, frameworks, toolchains, benchmarks, datasets, developer communities, reproducibility limits | what is being commoditized, what ecosystem primitives can be reused, and where platform products still need differentiation |
+| 学术前沿 | recent papers, top universities/labs, leading professors/researchers, benchmarks, workshops, exploratory prototypes | what the best academic minds are exploring, what may become feasible in 1-3 years, and which ideas are still too immature |
 | 投资/咨询/分析师 | a16z/VC reports, Gartner/IDC/Forrester or domain analysts, market maps, enterprise adoption surveys | external category framing and investment thesis; validate or challenge internal thesis |
 | 关键人物观点 | X posts, talks, interviews, blogs by founders, researchers, platform leaders, customer CTOs | direct quotes or paraphrased viewpoints that reveal strategic direction |
 
@@ -302,9 +304,9 @@ Minimum expectations:
 - Market analysis must identify value migration and commoditization pressure, not just "market is growing".
 - If a dimension lacks evidence, mark it as a gap and continue researching before final slide generation.
 
-## Market-Customer-Competition-Industry Analysis
+## Market-Customer-Competition-Ecosystem-Academia Analysis
 
-For solution or product technical planning, include a structured "四看" analysis. Save it as `research/market-customer-competition-industry.md` or include it in `research/synthesis.md`.
+For solution or product technical planning, include a structured "五看" analysis. Save it as `research/five-lens-analysis.md` or include it in `research/synthesis.md`.
 
 ### 1. 看市场
 
@@ -356,23 +358,39 @@ Customer/segment need -> Competitor capability -> Competitor strength -> Our cur
 
 Use this to derive strategy pages. Do not write "we should improve competitiveness" without naming the missing capabilities.
 
-### 4. 看行业
+### 4. 看生态
 
-Analyze the broader industry environment:
+Analyze the open-source and developer ecosystem. This is different from competitor analysis: it asks what the ecosystem is making easier, cheaper, standardized, or commoditized.
 
-- market development trend and demand migration
-- 产业链/生态位 changes, platform power shifts, standards/protocols, regulation, supply constraints, and channel changes
-- competitive landscape evolution: consolidation, platform bundling, startup disruption, open-source commoditization
-- macro support and constraints: policy, privacy/security, compute cost, model capability, device penetration, developer ecosystem, customer budget cycle
-- future market outlook and what it means for timing, entry point, and investment pacing
+- leading open-source projects, frameworks, tools, protocols, benchmarks, datasets, and communities
+- developer adoption signals: GitHub activity, releases, contributors, ecosystem integrations, plugin/tool marketplace, issue discussions, and documentation maturity
+- standards/protocols and interface trends: what becomes a reusable primitive, what remains fragmented, and what may become a de facto standard
+- commoditization pressure: what customers can self-build with coding agents, open-source stacks, and skills; what still requires platform-level reliability, governance, integration, and operations
+- ecosystem leverage: which components can be reused, wrapped, contributed to, or used as proof of technical direction
 
 Output requirements:
 
 ```text
-Industry trend -> Supportive forces -> Constraints -> Competitive landscape change -> Timing implication -> Strategy response
+Open-source/ecosystem signal -> Adopted primitive -> Commoditized capability -> Remaining platform gap -> Strategy response
 ```
 
-In the insight section, use "四看" evidence to support the core viewpoint overview. In the strategy section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets.
+### 5. 看学术
+
+Analyze academia as an early signal of where the frontier may move before industry products fully mature.
+
+- recent papers from top conferences, workshops, labs, universities, and research groups
+- viewpoints from important professors, lab leaders, benchmark authors, and influential researchers
+- new benchmarks, datasets, problem definitions, algorithms, architectures, and evaluation methods
+- exploratory prototypes that reveal a future technical direction even if they are not production-ready
+- gap between academic promise and engineering reality: reproducibility, scale, cost, reliability, safety, data access, and integration limits
+
+Output requirements:
+
+```text
+Academic signal -> Core idea -> Why it matters -> Engineering gap -> 1-3 year product/architecture implication
+```
+
+In the insight section, use "五看" evidence to support the core viewpoint overview. In the strategy section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets. Treat "看行业" as background inside "看市场" unless the user explicitly asks for a separate industry-policy section.
 
 ## Sharp Viewpoint Standard
 
