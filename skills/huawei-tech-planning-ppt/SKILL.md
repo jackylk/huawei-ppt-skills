@@ -123,9 +123,11 @@ Example:
 Updated Plan
 └ 页数已调整为40页，进入详细页稿与生成阶段。
   ✔ 建立40页工程和可复用素材库
+  □ 围绕4看完成deep research：看市场/看客户/看竞争/看行业
   □ 调研厂商、会议、论文、开源、客户和投资观点
   □ 保存来源文本、截图、引用摘录和素材索引
-  □ 形成核心洞察、客户/用户场景与买点分析
+  □ 形成核心洞察、客户/用户场景与买点分析，并和用户共创确认
+  □ 逐页确认核心观点、论据支撑、反证与取舍
   □ 形成策略架构、关键技术与量化目标
   □ 形成40页详细页稿和 imagegen 提示词
   □ 生成高密度 imagegen 页面并合成 PPTX
@@ -156,6 +158,11 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Record source URLs, dates, and why each source matters.
    - Convert research into one-theme insight claims; do not make a slide just because a source exists.
    - Use `references/research-assets.md` for the asset workflow.
+   - Use the **4看** research frame as the default deep-research backbone:
+     - **看市场:** identify target segment, customer boundary, market value demand, macro/segment/key-customer structure, adoption drivers, budget owner, and value migration.
+     - **看客户:** analyze typical target customers, workflows, pain points, willingness to pay, self-build boundary, procurement blockers, and what value the solution creates.
+     - **看竞争:** compare competitor product portfolios and key features against market/customer needs; identify what competitors satisfy, what we lack, and which competitiveness requirements follow.
+     - **看行业:** analyze market trend, technology trend, industry chain trend, ecosystem constraints, regulatory/security constraints, and future market support or blockers.
    - Use the Deep Research Matrix below. Cover market/category, customers/users, technology trends, competitors/incumbents, startups, academic/open-source, investor/analyst views, and key-person viewpoints unless the user explicitly narrows the scope.
    - For rapidly changing topics, research recent product releases, conference announcements, roadmap signals, X posts by company leaders/key engineers, startup launches, open source projects, academic papers, customer pain points, consulting reports, and investor views.
    - Preserve reusable source material under a stable research directory: raw pages, extracted text, screenshots, product screenshots, chart images, quote snippets, and a material index. Future revisions should enrich this repository rather than restart research.
@@ -165,6 +172,23 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - Do not treat a quick web scan or a list of major vendors as "deep research". For long-form planning decks, Stage 3 must pass the research sufficiency gate below before writing the final outline or claiming the insight work is complete.
    - Update the visible plan when each research group is completed: vendors, conferences, papers, open source, customer/user evidence, investor/analyst views, and leader/key-person viewpoints.
    - Research must produce sharp judgments, not neutral summaries. For every major insight, write the evidence chain, the opposing interpretation, why the chosen judgment is stronger, and what strategic action follows.
+
+### Stage 3.5: Content Co-Creation Gate
+
+   - Do not generate PPT pages immediately after research. First collaborate with the user to shape the argument.
+   - Produce a reviewable `planning/core-claims.md` or equivalent artifact before slide generation.
+   - For each proposed slide, list:
+     - `page title`
+     - `core viewpoint`
+     - `supporting evidence`
+     - `counter-evidence / risk`
+     - `why this judgment is stronger`
+     - `diagram or proof object`
+     - `source ids`
+   - Ask the user to challenge, add, remove, or sharpen the core viewpoints before generating imagegen prompts.
+   - If the user gives new information or disagrees with a claim, run targeted follow-up web research, update the source registry and synthesis, then revise the affected claims.
+   - Treat the user as a co-author. The best deck comes from combining external deep research with the user's internal judgment, customer experience, strategic intent, and technical constraints.
+   - This gate is mandatory for deep 30-40 page planning decks. Skip it only if the user explicitly asks for direct generation or a fast draft.
 
 ### Stage 4: Strategy Agenda
 
@@ -176,6 +200,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 
    - Return a two-part outline with slide titles and one claim per slide.
    - Get user approval before generating slides or PPTX.
+   - For serious planning decks, approval must cover not only the slide order, but also each page's core viewpoint and evidence logic.
    - For deep 30-40 page decks, do not stop after producing only an outline unless the user explicitly asked for an outline-only checkpoint. If the output is only an early outline, label it clearly as `preliminary outline, not deep analysis yet` and continue with research or ask whether to continue.
    - Update the visible plan after the outline is accepted or revised.
 
@@ -186,6 +211,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - For insight pages, start from a small set of core viewpoints. Write one overview page of these viewpoints, then use customer pain points, vendor product evidence, academic/open-source trends, and investor/analyst/customer quotes to support each viewpoint.
    - For strategy pages, every architecture, scenario, and key technology page must visibly derive from a prior insight. Avoid service introductions unless they explain a technical lever, competitive capability, or required new capability.
    - Persist the slide plan as a user-editable source of truth. The user may directly edit a slide claim, evidence list, layout instruction, or imagegen prompt and ask to regenerate only that page.
+   - The slide plan should preserve the content co-creation decisions. Do not silently rewrite a user-approved core claim into a weaker or more generic statement.
    - Do not let a slide plan remain at the level of `title + claim + layout type`. For high-density planning decks, each slide brief must contain enough concrete content to render a strong page: exact diagram nodes, evidence blocks, labels, metrics, comparison dimensions, source notes, and the bottom judgment text.
    - Before generation, expand each slide brief into a page-level content spec. A prompt that only says "四象限矩阵" or "八层架构" without concrete quadrant/layer labels, supporting evidence, and visual hierarchy is not acceptable.
 
