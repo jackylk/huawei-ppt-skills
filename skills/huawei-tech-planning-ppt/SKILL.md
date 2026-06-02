@@ -488,6 +488,7 @@ This skill has one output mode: **full-page imagegen slides assembled into a 16:
 - Do not put slide numbers inside the generated page image. In particular, never generate a large top-left number block such as `04.` or `12.`. If page numbers are needed, they should be added later by the PPTX wrapper/footer, not by imagegen.
 - If the user asks for editable-native PPT, explain that this skill is optimized for full-page imagegen output and suggest a separate editable-PPT workflow.
 - If the deck contains competitor evidence, still produce the final page through imagegen as a whole page. Use official screenshots/charts as source references when the image tool supports references; otherwise represent evidence with clearly labeled source blocks, redrawn mechanisms, and source notes. Do not fabricate competitor product UIs and call them screenshots.
+- Do not ask imagegen to invent, approximate, redraw, or decorate pages with company/product logos. Product and tool names such as `MLflow`, `LangGraph`, or `Databricks` may appear as plain text labels. Official screenshots or charts may retain their original logos when used as attributed source evidence.
 
 Packaging discipline:
 
@@ -1098,7 +1099,7 @@ Use this only for the imagegen route:
 ```text
 Use case: productivity-visual
 Asset type: 16:9 full-slide Chinese enterprise technical-planning PPT page, 1920x1080.
-Style: Huawei-like white/red technical report, white background, black title, dark gray subtitle, dense but clean management consulting layout, thin gray frames, red only for emphasis and conclusion, no logo, no watermark, no black panels, no gradient glow.
+Style: Huawei-like white/red technical report, white background, black title, dark gray subtitle, dense but clean management consulting layout, thin gray frames, red only for emphasis and conclusion, no decorative/fake/generated logos, no watermark, no black panels, no gradient glow.
 Forbidden elements: no slide number anywhere in the image; no large top-left number block; no title numbering prefix such as "04."; no footer page number.
 Layout type: <insight matrix | left architecture + right explanation | roadmap | key technology mechanism>
 Title in black: <title>
@@ -1151,7 +1152,7 @@ Before delivery:
 - Key-technology pages are technical-design-grade: they show the problem being solved, modules, interfaces/objects, flow, mechanisms, state, failure handling, evaluation method, quantified targets, competitive threshold, and development implications.
 - Normal content boxes use gray outlines; red is reserved for thesis, arrows, selected labels, and restrained conclusion treatments.
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
-- No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo.
+- No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo, and no generated/approximate third-party logos. Use plain text names for tools/products unless an official sourced screenshot/chart already contains the logo.
 - Imagegen output: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
 - Contact sheet creation is mandatory, but ImageMagick is not. Use ImageMagick, `sips`, Python/Pillow, Node/canvas, or a temporary local image script to assemble the overview without modifying original slide images.
 - Contact sheet inspection rejects sparse pages, text-light pages, pages without real proof objects, and pages with excessive empty whitespace.
