@@ -10,6 +10,12 @@
 - `huawei-tech-planning-ppt`：深度技术规划 PPT，强调“洞察 -> 策略”，包含深度调研、友商分析、客户/买点分析、关键技术展开、源码工作区和迭代修改流程。
 - `designer-toy-concept-ppt`：原创潮玩盲盒概念风 PPT，保持“洞察 -> 策略”的叙事结构，但默认中低信息密度，用原创潮玩角色、盲盒卡片、玩具实验室、能力货架等视觉表达概念、用户场景和产品愿景；可选 Open Peeps/OpenMoji/Twemoji/Blush 等开放素材，但不自动生成或仿制具体商业 IP。
 
+## huawei-tech-planning-ppt 工作流
+
+`huawei-tech-planning-ppt` 不是一次性生成 PPT 的模板，而是一个持续沉淀的技术规划工作区：先上网深度调研并保存素材，再提炼观点和叙事结构，用户反馈后继续补充证据与分析，确认后生成 imagegen PPT；后续还可以基于同一工作区输出交给 Codex/Coding Agent 的开发任务书。
+
+![huawei-tech-planning-ppt workflow](assets/tech-planning-live-workspace.png)
+
 ## 如何在 Codex 中安装
 
 > 请帮我安装这个 Codex skill 仓库：https://github.com/jackylk/huawei-ppt-skills 。如果我有访问权限，请 clone 到本地，把 `skills/huawei-style-ppt`、`skills/huawei-tech-planning-ppt` 和 `skills/designer-toy-concept-ppt` 复制到 `~/.codex/skills/`，安装 `python-pptx` 依赖，然后告诉我需要重启 Codex 才能使用。
