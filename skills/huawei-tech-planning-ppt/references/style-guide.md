@@ -40,6 +40,31 @@ Avoid black backgrounds, cyberpunk gradients, neon effects, decorative blobs, he
 
 ## Core Layouts
 
+### 0. Clean Technical Cover
+
+Use for the first slide of serious technical-planning decks.
+
+The cover should be calmer and cleaner than the body pages:
+- Keep only the main title, subtitle, date, author/owner, and at most 2-3 compact scenario/topic cards.
+- Do not place architecture stacks, capability matrices, state-object lists, evidence blocks, source notes, or KPI dashboards on the cover.
+- If scenario cards are useful, make them thin-outline cards under the subtitle. Each card should have one short title and one compact descriptor line. They should signal the planning scope, not explain the architecture.
+- Use plenty of whitespace. A thin Huawei-red rule under the title or near the bottom is enough for brand emphasis.
+- Prefer bottom-left metadata such as `日期：YYYY年M月D日` and `作者：<name> 与 Codex 联合共创` when the user asks for author/date.
+- Avoid logos unless the user explicitly asks. Do not add page numbers, dates outside the metadata block, version badges, decorative icons, or technical module chips.
+
+Good cover structure:
+- main title
+- subtitle
+- optional compact scenario cards
+- date and author metadata
+- one restrained red rule
+
+Bad cover structure:
+- title plus architecture diagram
+- title plus seven or more object chips
+- title plus competitor logo strip
+- dense claim matrix or evidence board
+
 ### 1. Dense Insight Board
 
 Use for industry, competitor, technology trend, or customer analysis.
@@ -52,38 +77,38 @@ Structure:
 - One page covers one theme only. Do not mix competitor analysis, customer demand, technology trend, and market landscape into one slide.
 
 Good for:
-- "数据库分支从 DevOps 工具演进为 agent 基础设施"
-- "只比拼秒级分支会失焦，深分支读写、治理、清理才是规模化瓶颈"
+- "<technology primitive> 从单点工具演进为 <system foundation>"
+- "只比拼单项性能会失焦，端到端任务成功率、治理、恢复和验证才是规模化瓶颈"
 
 ### 2. Competitor Capability Matrix
 
 Use for landscape and gap analysis.
 
 Rows:
-- Neon/Xata/Supabase/PlanetScale/Turso/Doltgres/DBay.
+- Representative incumbents, cloud/platform vendors, startups, open-source projects, and internal alternatives.
 
 Columns:
-- Branching model
-- Version/snapshot
-- Diff/merge
-- Agent workflow
-- Data masking
-- Control-plane QoS
-- Benchmark transparency
+- Core capability route
+- State/version/recovery model
+- Integration surface
+- Governance/security
+- Cost/operations
+- Evaluation transparency
+- Customer/workflow fit
 
-End with a red "战略空窗": where DBay can define a deeper category.
+End with a red "战略空窗": where a differentiated system, product, or platform can define a deeper category.
 
 ### 2b. Technology Trend Page
 
 Use for research and architecture trend analysis.
 
 Evidence zones:
-- agent workload shift: one user/task becomes many parallel agents.
-- branching benchmark: fast branch creation vs deep-branch read/write tradeoff.
-- state model shift: linear snapshots evolve toward DAG lineage, diff, merge, restore, squash.
-- enterprise constraint: masking, audit, QoS, cleanup become product capabilities.
+- workload shift: short single-step usage becomes long-running, multi-step, multi-actor, or governed workflow.
+- benchmark shift: single performance metric is no longer enough; task success, recovery, quality, cost, and review time matter.
+- state/model shift: linear records evolve toward traceable state, versioning, lineage, diff, merge, restore, or audit.
+- enterprise constraint: permission, audit, safety, cost, cleanup, and governance become product capabilities.
 
-End with a red "技术拐点": branchable databases are becoming agent state infrastructure, not just preview database tooling.
+End with a red "技术拐点": a capability is moving from helper/tool feature to system-level infrastructure.
 
 ### 2c. Technical Insight Mechanism Page
 
@@ -120,7 +145,7 @@ Writing form:
 
 ### 2d. Insight Summary Page
 
-Use after the individual insight pages and before strategy pages. It is a bridge page: it condenses competitor, technology, customer, and market insights into the architecture direction.
+Use after the individual insight pages and before technical-construction pages. It is a bridge page: it condenses competitor, technology, customer, and market insights into the architecture direction.
 
 Layout:
 - Title is short and red, usually "洞察总结" or a claim title.
@@ -138,11 +163,11 @@ Writing form:
 Good structure:
 - Left diagram: `<new architecture category>` with layers such as application/capability, platform/control, state/data, runtime/resource, governance/observability.
 - Right text groups: `<创新应用>`, `<融合平台>`, `<关键底座>` or better topic-specific names.
-- Bottom or final red sentence: the strategic implication that leads directly into the architecture strategy page.
+- Bottom or final red sentence: the strategic implication that leads directly into the technical-construction architecture page.
 
 ### 3. Architecture Competitiveness Page
 
-Use for target architecture and architecture competitiveness strategy pages.
+Use for target architecture and architecture competitiveness pages in the technical-construction section.
 
 Left 55-65%:
 - Use one large layered architecture diagram with a vertical capability axis on the far left.
@@ -165,9 +190,9 @@ Right 35-45%:
 Bottom:
 - red-outlined viewpoint box.
 
-### 4. Overall Construction Strategy Page
+### 4. Overall Technical Construction Page
 
-Use at the start of the strategy part. It translates insight summary into construction principles.
+Use at the start of the technical-construction part. It translates insight summary into construction principles.
 
 Layout:
 - title is a strategic claim.
@@ -262,25 +287,25 @@ Use red diamonds or vertical gates for decisions.
 
 Use strong, concise, technical judgment:
 
-- "分支速度只是入口，状态谱系才是 agent 规模化的控制面。"
-- "Agent-native 数据库的关键不在连接串，而在可试错、可回滚、可合并、可审计。"
-- "版本 DAG 把并行实验从临时资源变成可治理资产。"
-- "安全分支、QoS 与 cleanup 必须产品化，否则 agent 并发会放大控制面风险。"
+- "单点性能只是入口，端到端可验证成功率才是规模化控制点。"
+- "系统差异化不在工具清单，而在可恢复、可审计、可治理的运行闭环。"
+- "版本化与因果链路把临时实验变成可治理资产。"
+- "权限、成本和回滚必须产品化，否则并行执行会放大控制面风险。"
 
 Avoid:
 - vague adjectives: "先进", "领先", "智能化" without proof.
 - pure lists with no conclusion.
 - long paragraph explanations where a matrix or mechanism diagram is better.
 
-## DBay / Agentic DB Content Heuristics
+## Domain-Specific Content Heuristics
 
-When building an Agentic DB planning deck:
+When building a domain-specific technical planning deck:
 
-- Start with the category shift: database branching moves from developer preview environments to AI agent infrastructure.
-- Show that competitors optimize different axes: serverless branching, full preview platform, schema governance, Git-like data semantics, edge branching.
-- Position DBay around "agent-native database workspace": branch/version lifecycle, version DAG, masking, audit, QoS, cleanup, benchmark.
-- Make the technical plan concrete: workspace API, branch lifecycle state machine, version DAG metadata, diff/merge engine, policy enforcement, async cleanup jobs.
-- Use benchmarks as product proof: branch create p95, compute ready time, version read p95, branch depth impact, cleanup final consistency, rate-limit predictability.
+- Start with the category shift: what used to be a helper/tool capability is becoming a system-level foundation.
+- Show that competitors optimize different axes: user workflow, platform integration, governance, reliability, cost, evaluation, or ecosystem leverage.
+- Position the proposed system around the real wedge scenario and the capabilities required to win that scenario.
+- Make the technical plan concrete: APIs, lifecycle state machine, metadata model, execution hooks, policy enforcement, evaluation loop, cleanup/operations jobs.
+- Use benchmarks, task sets, fault injection, pilot workflows, or acceptance rubrics as product proof.
 
 ## Final QA
 
@@ -291,6 +316,6 @@ At readable size, check:
 - no page number is embedded in the generated image, especially no large top-left number block.
 - text is not fake or garbled.
 - dense pages still have grouping and hierarchy.
-- strategy pages visibly use left visual/right explanation.
+- technical-construction and execution-strategy pages visibly use left visual/right explanation when appropriate.
 - red is scarce and meaningful.
 - bottom viewpoint is a conclusion, not a label.

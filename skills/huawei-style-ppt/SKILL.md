@@ -12,7 +12,7 @@ This skill has one output mode: **full-page imagegen slides assembled into PPTX*
 ## Workflow
 
 1. Clarify the deck outline, audience, and slide count if not already clear.
-2. Draft each slide as a concise message: title, subtitle, main diagram layout, and bottom conclusion.
+2. Draft each slide as a concise message: title, claim, main proof object, layout zones, and bottom viewpoint.
 3. Generate each slide as a 16:9 PNG with `imagegen`.
 4. Inspect a contact sheet or thumbnails before packaging when there are more than 3 slides.
 5. Copy final PNGs into the project output directory.
@@ -23,15 +23,18 @@ For production decks where text correctness matters, keep the page as full-slide
 
 ## Style Rules
 
-Follow `references/style-guide.md` for exact visual rules. The core style is:
+Follow `references/style-guide.md` for exact visual rules and reusable layout patterns. For covers, architecture pages, mechanism pages, scenario pages, roadmap pages, and validation/KPI pages, read the corresponding section before writing imagegen prompts. The core style is:
 
 - White background.
 - Black titles, never colored titles.
+- Titles should normally state a judgment or action, not just a topic label.
 - Huawei gray content frames for normal boxes.
 - Red only for emphasis, arrows, selected labels, warning accents, and restrained conclusion treatment.
 - No black panels, no dark brush headers, no page numbers beside titles.
+- Clean covers: main title, subtitle, date/author metadata, and at most 2-3 compact scenario/topic cards. Do not put architecture diagrams, dense object chips, evidence boards, logo strips, or KPI matrices on the cover.
 - Bottom viewpoint/conclusion should use restrained Huawei-red treatment: pale-red callout, thin red rule, red left bar, or small red `判断` / `启示` label. Avoid large pure-red frames and thick red boxes.
-- Layouts are management-report diagrams: layered architecture, comparison, matrix, roadmap, capability grid, control-flow.
+- Layouts are management-report proof objects: layered architecture, left visual/right explanation, comparison matrix, roadmap, capability grid, control-flow, scenario flow, evidence board, validation/KPI matrix.
+- Overall architecture pages should not be diagram-only; include a right-side explanation panel unless the user explicitly asks for a pure visual.
 
 ## Huawei Red Discipline
 
@@ -58,10 +61,15 @@ Strict style rules: Huawei-like white report style; no slide number; no title nu
 
 Title in black: <title>
 Subtitle in dark gray: <subtitle>
-Layout: <diagram/layout instructions>
+Claim: <one sharp judgment>
+Layout zones: <exact left/right/top/bottom structure with proportions>
+Main proof object: <diagram/table/chart instructions with exact node labels, layers, arrows, rows/columns, metrics, or steps>
+Right-side or bottom interpretation: <concise judgment bullets or explanatory blocks>
 Bottom conclusion treatment: restrained Huawei-red callout, preferably pale-red background with thin red border or a red left bar: <one-sentence viewpoint>
 Design quality: formal Huawei-style management technical briefing, clean grid, readable Chinese and English labels, professional, high information density but not crowded.
 ```
+
+For cover slides, use the `Clean Cover` rules in `references/style-guide.md`: keep the cover sparse, with title, subtitle, optional 2-3 small scenario/topic cards, date, author/owner, and one restrained red rule.
 
 ## Packaging
 
@@ -91,8 +99,12 @@ Before final delivery, verify:
 - The PPTX has the expected slide count.
 - Slides are 16:9.
 - Final PPTX pages are full-slide image pages; do not silently substitute editable/native PowerPoint shapes.
+- The cover is intentionally sparse and does not look like an architecture or insight slide.
 - No slide has accidental title numbering.
+- Each non-cover slide has one claim, one proof object, and one bottom viewpoint.
+- Overall architecture pages include explanatory text, not only a diagram.
 - Normal content boxes are gray, not red.
 - Red is restrained: no thick red boxes, no large solid red panels, no repeated red containers.
 - Bottom conclusions use pale-red callouts, thin red rules, or red left bars unless an exceptional warning page needs stronger treatment.
 - Page 3/story pages clearly show the intended business logic, not only abstract labels.
+- Generated Chinese is legible; reject pages with garbled Chinese, unreadable labels, or obvious layout collisions.

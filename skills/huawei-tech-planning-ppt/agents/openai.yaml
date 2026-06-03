@@ -1,5 +1,5 @@
 interface:
   display_name: "Huawei Tech Planning PPT"
-  short_description: "Insight-to-architecture Huawei planning decks"
+  short_description: "Insight-to-execution Huawei technical planning decks"
   brand_color: "#C7000B"
   default_prompt: "Use $huawei-tech-planning-ppt to turn dense insights into a Huawei-style Chinese technical planning PPT."

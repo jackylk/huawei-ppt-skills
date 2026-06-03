@@ -10,17 +10,19 @@ Use this skill for Chinese enterprise technical-planning decks where the job is 
 The core pattern is:
 
 ```text
-行业/技术/友商/客户洞察 -> 洞察总结 -> 总体构建策略 -> 总体架构 -> 用户场景 -> 重点模块/关键技术 -> 策略总结
+强场景/行业/技术/友商/客户洞察 -> 洞察总结 -> 技术构想 -> 总体架构 -> 关键技术 -> 执行策略 -> 验证闭环
 ```
 
 For deep technical planning, assume the deck is meant to guide 2-3 years of technical construction, not just explain a product. Default to a 30-40 page structure unless the user asks for a short deck:
 
 ```text
-Part 1 洞察: 15-20 pages
-Part 2 策略: 15-20 pages
+封面 + 总体目录: 2 pages
+Part 1 洞察分析: 12-18 pages
+Part 2 技术构想: 10-16 pages
+Part 3 执行策略: 8-14 pages
 ```
 
-Each part needs its own directory/agenda slide. For long decks, add a small top-right chapter tag on every page, such as `Part 1 洞察 / 友商分析` or `Part 2 策略 / 关键技术`.
+Every long-form deck must include a global directory slide immediately after the cover. The directory should state the three parts and how the deck moves from **why needed -> what to build -> how to execute and verify**. Each part also needs its own directory/agenda slide. For long decks, add a small top-right chapter tag on every page, such as `Part 1 洞察分析 / 友商分析`, `Part 2 技术构想 / 关键技术`, or `Part 3 执行策略 / 验证方案`.
 
 ## Interaction Contract
 
@@ -29,11 +31,12 @@ Do not jump straight into slide generation unless the user already supplied a cl
 Required frame:
 
 ```text
-Part 1: 洞察
-Part 2: 策略
+Part 1: 洞察分析
+Part 2: 技术构想
+Part 3: 执行策略
 ```
 
-The user may rename the parts, but do not merge them. Huawei-style technical planning decks need evidence-led insight pages before architecture planning pages.
+The user may rename the parts, but do not merge them unless they explicitly ask for a very short deck. Huawei-style technical planning decks need evidence-led insight pages, then a clear technical construction thesis, then an executable implementation and validation strategy.
 
 Ask questions in stages. Prefer 2-4 concise questions per stage; stop asking once the answer is enough to draft the next artifact.
 
@@ -76,39 +79,56 @@ Do not begin broad research until these are clear enough to guide source selecti
 Default deck structure:
 
 ```text
-Part 1 洞察
+封面
+总体目录（三部分）
+
+Part 1 洞察分析
 - 行业趋势洞察
 - 技术趋势洞察
 - 友商分析
 - 客户需求洞察
+- 强场景/切入场景筛选
 - 洞察总结
 
-Part 2 策略
-- 总体构建策略
+Part 2 技术构想
+- 总体构想 / 构建原则
 - 总体架构图
-- 用户场景讲解
-- 重点模块与关键技术
-- 策略总结
+- 目标对象 / 核心 API / 关键模块
+- 关键技术（一页一个技术）
+- 技术构想总结 / 指标体系
+
+Part 3 执行策略
+- 改造对象与现有基础
+- 分阶段建设策略
+- 关键改造项
+- 验证方案 / 评测集 / 故障注入
+- 路线图 / 风险取舍 / 策略总结
 ```
 
 Long-form planning structure:
 
 ```text
 封面
+总体目录：Part 1 洞察分析 / Part 2 技术构想 / Part 3 执行策略
 Part 1 洞察目录
 核心观点总览
+强场景/切入场景筛选
 历史脉络与阶段判断
 市场/会议/厂商/云厂商/创业公司/开源/学术/客户/投资观点洞察
 友商分析若干页
 客户、用户、场景、买点分析
 洞察总结与策略推导
-Part 2 策略目录
-总体构建策略
-目标架构与竞争力
-用户场景与产品包
+Part 2 技术构想目录
+总体构想 / 构建原则
+总体架构与竞争力
+目标对象 / 核心 API / 关键模块
 关键技术若干页（一页一个关键技术）
-量化目标、路线图、阶段门禁
-策略总结
+量化目标、评测指标、技术构想总结
+Part 3 执行策略目录
+现有基础与改造对象
+关键改造项若干页
+验证方案：benchmark / 真实任务集 / 故障注入
+阶段路线图、风险取舍、策略总结
 ```
 
 ## Guided Workflow
@@ -139,13 +159,14 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 ### Stage 1: Frame
 
    - Confirm topic, audience, expected slide count, delivery mode, and whether there are reference decks/images.
-   - State that the deck will be split into **洞察** and **策略**.
+   - State that the deck will be split into **洞察分析、技术构想、执行策略** and will include a global directory slide after the cover.
    - Ask the mandatory writing-direction questions: research focus, intended viewpoints, information density, and decision use.
    - Create the initial visible plan after the user answers enough to proceed.
 
 ### Stage 2: Insight Agenda
 
    - Treat the default insight scope as industry trend, technology trend, competitor analysis, customer demand, and insight summary.
+   - Identify the strongest scenario wedge early: which specific user/customer/workflow scenario creates urgent technical pressure, why existing approaches fail, and how success can be measured.
    - Ask which of the default themes must be included, reduced, or emphasized.
    - Ask for target competitors, reports/sources, target customer types, and must-cover technical signals.
    - Ask what the user already believes or wants challenged, so research can prove, disprove, or refine those viewpoints rather than becoming a generic scan.
@@ -194,13 +215,14 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 
 ### Stage 4: Strategy Agenda
 
-   - Treat the default strategy scope as overall construction strategy, overall architecture diagram, user scenarios,重点模块与关键技术, and strategy summary.
-   - Ask what strategy output needs extra emphasis: architecture competitiveness, roadmap, product packaging, benchmark/KPI, governance, or delivery phases.
-   - Ask what existing product constraints, technical assumptions, and desired differentiators must be reflected.
+   - Treat the default technical-construction scope as overall construction thesis, target architecture, core object/API model, key technologies, and technical metrics.
+   - Treat the default execution-strategy scope as existing foundation, concrete modification target, implementation plan, validation plan, roadmap, and risks.
+   - Ask what output needs extra emphasis: architecture competitiveness, key technologies, implementation roadmap, benchmark/KPI, governance, or delivery phases.
+   - Ask what existing product/code/service foundation can be reused and what concrete system, module, repository, or platform should be modified in the execution strategy.
 
 ### Stage 5: Deck Spec
 
-   - Return a two-part outline with slide titles and one claim per slide.
+   - Return a three-part outline with slide titles and one claim per slide. The outline must include a global directory slide after the cover.
    - Get user approval before generating slides or PPTX.
    - For serious planning decks, approval must cover not only the slide order, but also each page's core viewpoint and evidence logic.
    - For deep 30-40 page decks, do not stop after producing only an outline unless the user explicitly asked for an outline-only checkpoint. If the output is only an early outline, label it clearly as `preliminary outline, not deep analysis yet` and continue with research or ask whether to continue.
@@ -211,7 +233,8 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - For each slide, write title, claim, proof object, layout, red judgment, and key source needs.
    - For architecture pages, use the current topic's own layer names and modules; do not copy terms from reference examples.
    - For insight pages, start from a small set of core viewpoints. Write one overview page of these viewpoints, then use customer pain points, vendor product evidence, academic/open-source trends, and investor/analyst/customer quotes to support each viewpoint.
-   - For strategy pages, every architecture, scenario, and key technology page must visibly derive from a prior insight. Avoid service introductions unless they explain a technical lever, competitive capability, or required new capability.
+   - For technical-construction pages, every architecture, scenario, and key technology page must visibly derive from a prior insight. Avoid service introductions unless they explain a technical lever, competitive capability, or required new capability.
+   - For execution-strategy pages, name the concrete existing foundation or modification target. Do not write only abstract plans such as "build platform capability"; explain what to change, where it connects, what new objects/APIs/modules are added, and how success will be verified.
    - Persist the slide plan as a user-editable source of truth. The user may directly edit a slide claim, evidence list, layout instruction, or imagegen prompt and ask to regenerate only that page.
    - The slide plan should preserve the content co-creation decisions. Do not silently rewrite a user-approved core claim into a weaker or more generic statement.
    - Do not let a slide plan remain at the level of `title + claim + layout type`. For high-density planning decks, each slide brief must contain enough concrete content to render a strong page: exact diagram nodes, evidence blocks, labels, metrics, comparison dimensions, source notes, and the bottom judgment text.
@@ -374,7 +397,7 @@ Output requirements:
 Customer/segment need -> Competitor capability -> Competitor strength -> Our current capability -> Gap -> Required solution competitiveness
 ```
 
-Use this to derive strategy pages. Do not write "we should improve competitiveness" without naming the missing capabilities.
+Use this to derive technical-construction and execution-strategy pages. Do not write "we should improve competitiveness" without naming the missing capabilities.
 
 ### 4. 看生态
 
@@ -411,7 +434,7 @@ Academic signal -> Core idea -> Why it matters -> Engineering gap -> 1-3 year pr
 
 If exact paper metadata cannot be verified, do not show author names or years on the slide. Use a direction card such as `<research direction> -> <technical inspiration>` and keep the source gap visible in the research notes.
 
-In the insight section, use "五看" evidence to support the core viewpoint overview. In the strategy section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets. Treat "看行业" as background inside "看市场" unless the user explicitly asks for a separate industry-policy section.
+In the insight section, use "五看" evidence to support the core viewpoint overview. In the technical-construction section, use it to derive target customer selection, product package, architecture requirements, key technologies, and quantified competitiveness targets. In the execution-strategy section, use it to derive modification targets, rollout sequence, validation plan, and risk controls. Treat "看行业" as background inside "看市场" unless the user explicitly asks for a separate industry-policy section.
 
 ## Sharp Viewpoint Standard
 
@@ -466,7 +489,7 @@ If the analysis cannot fill this table, keep researching before generating slide
 For a request like "给 Agent DB 做一个华为风格技术规划 PPT", respond with a scoped planning question, not a draft deck:
 
 ```text
-我建议固定为两大部分：洞察 + 策略。
+我建议固定为三部分：洞察分析 + 技术构想 + 执行策略，并在封面后加一页总体目录。
 
 先确认写作方向，避免后面调研发散：
 1. 调研重点：
@@ -481,7 +504,7 @@ For a request like "给 Agent DB 做一个华为风格技术规划 PPT", respond
 也可以直接补充必须纳入或排除的厂商、报告、客户场景、技术路线。
 ```
 
-After the user answers, ask the next stage about strategy output: target architecture, architecture competitiveness, key technologies, roadmap, KPIs, and constraints.
+After the user answers, ask the next stage about the strong scenario wedge, target architecture, key technologies, concrete implementation/modification target, roadmap, KPIs, benchmark/task-set validation, and constraints.
 
 ## Output Mode
 
@@ -490,6 +513,7 @@ This skill has one output mode: **full-page imagegen slides assembled into a 16:
 - Generate each final slide as a complete full-slide PNG with imagegen. The whole page layout, diagrams, callouts, viewpoint boxes, and visual composition belong in the imagegen prompt.
 - Keep the thinking layer editable through `planning/*.md` and `prompts/slide-XX.md`; the final PPT pages themselves are image-based.
 - Do not offer or choose editable/native PPTX, hybrid rebuilds, or native-shape alternatives inside this skill.
+- Make the cover visually cleaner than body pages: main title, subtitle, date/author metadata, and at most 2-3 small scenario/topic cards. Do not put architecture diagrams, object chips, evidence boards, logo strips, or KPI matrices on the cover. Use `references/style-guide.md` section "Clean Technical Cover" when writing the cover prompt.
 - Do not put slide numbers inside the generated page image. In particular, never generate a large top-left number block such as `04.` or `12.`. If page numbers are needed, they should be added later by the PPTX wrapper/footer, not by imagegen.
 - If the user asks for editable-native PPT, explain that this skill is optimized for full-page imagegen output and suggest a separate editable-PPT workflow.
 - If the deck contains competitor evidence, still produce the final page through imagegen as a whole page. Use official screenshots/charts as source references when the image tool supports references; otherwise represent evidence with clearly labeled source blocks, redrawn mechanisms, and source notes. Do not fabricate competitor product UIs and call them screenshots.
@@ -580,7 +604,7 @@ Example delivery wording:
 
 ## Core Slide Logic
 
-Read reference decks or sample images first. Separate **洞察页** and **策略页** patterns, then extract a claim spine: one sentence per slide, each sentence must make a judgment, not list facts.
+Read reference decks or sample images first. Separate **洞察分析页、技术构想页、执行策略页** patterns, then extract a claim spine: one sentence per slide, each sentence must make a judgment, not list facts.
 
 Every slide brief needs:
 
@@ -589,7 +613,7 @@ Every slide brief needs:
 - proof object: chart, comparison matrix, architecture diagram, roadmap, or control-flow
 - concrete diagram/table content: node names, arrows, layer labels, row/column labels, metrics, or scenario steps
 - 2-4 evidence blocks or source-backed facts on insight pages
-- 3-5 architecture/technology explanation bullets on strategy pages
+- 3-5 architecture/technology/execution explanation bullets on technical-construction or execution-strategy pages
 - restrained Huawei-red conclusion treatment: thin red line, pale-red callout, red left bar, or small red label
 - source notes or screenshot/material references for insight pages
 - top-right chapter tag for long decks
@@ -603,6 +627,27 @@ industry/technology/customer/competitor signal
 -> architecture and key technology response
 -> measurable competitiveness or roadmap
 ```
+
+For deep technical planning, use the stronger three-part logic:
+
+```text
+strong scenario wedge
+-> why current approaches fail
+-> system requirements
+-> technical construction and target architecture
+-> concrete implementation/modification strategy
+-> benchmark or task-set validation
+```
+
+The scenario wedge should be specific and high-pressure, not a generic market segment. Prefer scenarios with several of these traits:
+
+- long-running or multi-step work
+- multiple actors, services, tools, or teams must coordinate
+- artifacts, data, state, decisions, or user-visible outputs are produced
+- failure has recovery, audit, safety, cost, or trust consequences
+- success can be evaluated by a benchmark, task set, rubric, acceptance test, or real user workflow
+
+Do not begin the technical-construction section by listing platform capabilities. First show which concrete scenario or failure mode creates the need. Then derive system requirements, architecture, key technologies, execution strategy, and validation.
 
 ## Deep Insight Writing
 
@@ -627,7 +672,7 @@ For each non-cover/non-directory slide:
 - Prefer a left visual/right judgment layout, a top evidence/bottom mechanism layout, or a central architecture with side explanation. Avoid a mostly empty canvas with 3-5 floating boxes.
 - Use concrete labels. Replace vague nodes like `输入层 Router` with richer mechanism labels such as `意图包解析`, `权限票据校验`, `执行体路由`, `回执验证`, `失败回滚`.
 - Insight pages should show evidence and interpretation together: source signal -> what it proves -> strategic judgment.
-- Strategy pages should show mechanism and build target together: architecture position -> hard technical point -> measurable target.
+- Technical-construction pages should show mechanism and build target together: architecture position -> hard technical point -> measurable target.
 - Key-technology pages must include problem definition, module decomposition, technical principle, data/control flow, core objects/interfaces, evaluation method, quantified targets, competitive threshold, and engineering plan; a single router diagram or capability slogan is not enough.
 - Avoid generic decorative diagrams, oversized titles, low text density, and empty whitespace. If the page reads as "one idea with a few boxes", revise the prompt before delivery.
 
@@ -822,10 +867,12 @@ Visual density: high-density Huawei technical planning page, white/light-gray ca
 
 - Do not make an information collage. Every page must answer: "so what?"
 - Insight pages carry high information density, but one page should cover one theme only. Do not combine market landscape, competitor analysis, customer analysis, and technology trend on the same slide. Use separate pages such as "友商分析", "技术趋势", "客户需求", and "市场格局"; each page can contain several evidence blocks if they all support the same theme and ladder up to one red judgment.
-- Strategy pages are more resolved: usually left visual architecture/flow plus right explanatory text. For target-architecture pages, the right side should first explain **架构竞争力** in several sufficiently developed points; each point should follow "quantified target -> technical lever -> capability/effect". Avoid splitting too early into generic "key technologies / challenges / metrics" blocks unless the slide is explicitly a key-technology or roadmap page.
+- Technical-construction pages are more resolved: usually left visual architecture/flow plus right explanatory text. For overall-concept or target-architecture pages, default to **left architecture diagram + right detailed explanation**. The right side should explain layer responsibilities, how the runtime/control flow uses the data/system layer, what the core objects/APIs are, and what foundation or backend carries the state. A diagram-only architecture page is not enough for a serious technical planning deck.
+- For target-architecture pages, the right side should first explain **架构竞争力** in several sufficiently developed points; each point should follow "quantified target -> technical lever -> capability/effect". Avoid splitting too early into generic "key technologies / challenges / metrics" blocks unless the slide is explicitly a key-technology or roadmap page.
+- Execution-strategy pages must be practical: show the existing foundation, the modification surface, new modules/APIs/objects, integration points, rollout sequence, validation method, and risk controls. Do not let execution strategy become a generic roadmap with no named implementation target.
 - When imitating a reference architecture page, extract its layout, writing cadence, hierarchy, typography, and evidence style. Do not copy its domain-specific architecture terms unless those terms belong to the current topic.
-- Strategy must visibly inherit the insight. Use repeated terms such as "agent 并发", "版本 DAG", "安全分支", "控制面 QoS" to show continuity.
-- Prefer hard, compressed viewpoint language: "分支速度不是终局，agent 规模化需要状态谱系与治理闭环。"
+- Strategy must visibly inherit the insight. Reuse the deck's own terms for scenario pressure, system requirements, architecture objects, key technologies, and validation metrics so the narrative stays continuous.
+- Prefer hard, compressed viewpoint language that names a concrete tradeoff, failure mode, or control point. Avoid generic phrases such as "提升能力" or "完善平台".
 - For technical planning, emphasize the core technologies the team must master and the level needed to be competitive. Do not let the deck become a service catalog.
 - When existing internal services or assets are relevant, use them as technical foundations and explicitly state what new capabilities they need. The point is "how to build future competitiveness", not "what services exist today".
 
@@ -844,9 +891,9 @@ Keep the Huawei white/red style, but use red as a precision signal rather than a
 - Bottom viewpoints should not default to heavy red-outlined boxes. Use a restrained callout unless the slide needs an exceptional warning.
 - Chapter tags should be small pale-red pills or gray pills with red text; do not use solid red tags.
 
-## Strategy Writing
+## Technical Construction Writing
 
-The strategy part must be derived from the insight part and answer what to build over the planning horizon.
+The technical-construction part must be derived from the insight part and answer what to build over the planning horizon.
 
 For each major architecture or key technology page, include:
 
@@ -859,18 +906,30 @@ For each major architecture or key technology page, include:
 Key technologies should be expanded one page per technology. Each page should explain:
 
 ```text
-Problem -> mechanism -> architecture position -> hard points -> metrics -> build plan
+scenario failure -> system requirement -> mechanism -> architecture position -> core objects/APIs -> runtime/process landing -> metrics -> build plan
 ```
 
 Avoid grouping many hard technologies into one generic "关键技术" page in long decks.
 
 ## Technical Design Depth
 
-The strategy section must be deep enough to guide the next phase of technical development. Do not write capability slogans or generic technology labels.
+The technical-construction section must be deep enough to guide the next phase of technical development. Do not write capability slogans or generic technology labels.
 
 ## Key Technology Page Template
 
 For key-technology pages in Huawei technical planning decks, prefer the following reference-derived structure when the slide needs to explain one hard technology in depth.
+
+Every key-technology page must visibly close this loop:
+
+```text
+scenario demand/failure
+-> technical mechanism
+-> data/control objects and interfaces
+-> execution or runtime/process landing
+-> benchmark / metric / acceptance condition
+```
+
+If a key-technology page cannot name the scenario failure it solves or where it lands in execution, revise it before generation.
 
 ### Layout
 
@@ -885,6 +944,7 @@ Left 48-52%: 应用场景与诉求
 Right 48-52%: 关键竞争力目标
   - 3 metric chips or goal capsules across the top
   - 3-5 numbered technical construction items
+  - core objects/APIs, process hooks, or integration points when the technology depends on system/runtime changes
 Bottom: restrained red conclusion or footer note if required; do not include slide/page numbers inside the image
 ```
 
@@ -988,7 +1048,7 @@ Weak writing to avoid:
 Rewrite as:
 
 ```text
-长程目标锚定：将任务目标、约束、验收标准固化为GoalSpec对象，并在每N步做目标对齐校验，目标偏移时触发重规划。
+长程目标锚定：将任务目标、约束、验收标准固化为可查询的目标对象，并在每N步做目标对齐校验，目标偏移时触发重规划。
 ```
 
 For each proposed key technology, include technical design content:
@@ -1061,27 +1121,77 @@ Use "买点分析" for the page title when the purpose is willingness-to-pay. Se
 - **Vendor-dependent:** cross-domain, governed, production, auditable, multi-user, high-scale, or high-risk tasks.
 - **Paid buy points:** trust, security, integration, automation depth, evaluation, operational guarantees, and business outcome ownership.
 
+## Execution Strategy and Validation
+
+The execution-strategy part must prove the plan is buildable, not only desirable.
+
+Execution-strategy pages should include:
+
+- **Modification target:** the existing product, service, codebase, platform, workflow, dataset, or operating process to change.
+- **Current foundation:** reusable capabilities, constraints, missing pieces, and why this foundation is a plausible starting point.
+- **New construction:** new modules, APIs, objects, adapters, validators, data models, control flows, UI/process changes, or governance hooks.
+- **Integration path:** where new capabilities plug into existing runtime, data layer, toolchain, workflow, deployment, operations, or customer process.
+- **Rollout sequence:** MVP, expansion, platformization, and what each stage must prove before moving on.
+- **Risk controls:** fallback, rollback, manual review, safety gate, budget/cost control, reliability target, or adoption blocker.
+
+Validation pages must bind metrics to concrete evidence surfaces. Do not write only abstract KPIs.
+
+Use a layered validation plan:
+
+```text
+Primary benchmark / task set -> proves the wedge scenario
+Fast regression set -> supports iteration during development
+Fault injection / red-team set -> proves recovery, blocking, rollback, or safety
+Extension benchmarks -> test adjacent scenarios for generalization
+Operational/customer metrics -> prove production value after deployment
+```
+
+For every major KPI, name where it is measured:
+
+```text
+metric -> benchmark/task set -> data captured -> acceptance threshold or comparison baseline
+```
+
+Good examples of validation surfaces:
+
+- public benchmark, official task set, or competition dataset
+- internal golden tasks or historical customer workflows
+- fault injection cases based on real failures
+- offline replay set from production traces
+- A/B test or pilot customer acceptance criteria
+- manual expert review rubric when automation is not reliable yet
+
+Avoid fake current numbers. If no baseline has been measured, say `首轮验证先建立基线` or show target thresholds and data-collection plan instead of invented percentages.
+
 ## Slide Sequence
 
-A compact technical planning deck usually uses 4-7 pages:
+A compact technical planning deck usually uses 7-12 pages:
 
-Part 1 **洞察**
+Opening
 
-1. **行业趋势洞察:** market/category change and why now.
-2. **技术趋势洞察:** architecture/benchmark/research trend and the technical inflection.
-3. **友商分析:** competitor routes, capability gaps, and strategic opening.
-4. **客户需求洞察:** target customers, scenarios, pain points, and purchase/adoption criteria.
-5. **洞察总结:** synthesize previous insight pages into the next architecture direction.
+1. **封面**
+2. **总体目录:** state the three parts and the why -> what -> how/verify logic.
 
-Part 2 **策略**
+Part 1 **洞察分析**
 
-6. **总体构建策略:** the strategic construction thesis and design principles.
-7. **总体架构图:** target architecture with architecture competitiveness.
-8. **用户场景讲解:** explain key user scenarios against the architecture.
-9. **重点模块与关键技术:** module-level mechanisms and hard technical points.
-10. **策略总结:** conclusion, roadmap/gates, KPI or investment priorities.
+3. **强场景/行业趋势洞察:** market/category change, scenario pressure, and why now.
+4. **技术趋势洞察:** architecture/benchmark/research trend and the technical inflection.
+5. **友商/生态/客户洞察:** competitor routes, capability gaps, customer pain, and strategic opening.
+6. **洞察总结:** synthesize previous insight pages into system requirements.
 
-For a short sample, keep the same two-part logic but compress to 5 pages: industry/tech/competitor combined insight, insight summary, overall construction strategy, architecture, strategy summary.
+Part 2 **技术构想**
+
+7. **总体构想:** the technical construction thesis and design principles.
+8. **总体架构图:** target architecture with left architecture diagram and right explanation.
+9. **关键技术:** one or more key technologies, each tied to scenario failure, mechanism, objects/APIs, landing, and metrics.
+
+Part 3 **执行策略**
+
+10. **实施改造方案:** existing foundation, modification target, new modules/APIs, and integration path.
+11. **验证方案:** benchmark/task set, fault injection, baseline comparison, and acceptance metrics.
+12. **路线图/风险/总结:** staged roadmap, risks, gates, and final strategy judgment.
+
+For a very short sample, keep the same three-part logic but compress to 6-7 pages: cover, global agenda, combined insight, overall technical construction, key technology, execution/validation, summary.
 
 ## Page Draft Pattern
 
@@ -1152,12 +1262,19 @@ or use an available fallback such as `pptxgenjs` only to place each PNG/JPG full
 
 Before delivery:
 
+- Deck has three parts by default: 洞察分析, 技术构想, 执行策略. If compressed, the logic still preserves why -> what -> how/verify.
+- A global directory slide appears immediately after the cover and clearly explains the three-part structure.
+- The cover is intentionally sparse: main title, subtitle, date/author metadata, and at most 2-3 compact scenario/topic cards. Reject covers that look like dense architecture or insight slides.
+- The insight section identifies a strong scenario wedge or clear high-pressure customer/workflow scenario before proposing platform/system capabilities.
 - Each slide has one claim, one proof object, and one bottom viewpoint.
 - Each non-cover/non-directory slide has concrete page content, not only a title/claim/layout type.
 - Each non-cover/non-directory prompt specifies exact visual content: diagram nodes, table labels, evidence blocks, explanation bullets, and bottom judgment.
 - Insight pages contain evidence plus judgment, not raw information lists.
-- Strategy pages use left visual/right explanation unless another structure is clearly better.
-- Strategy and key-technology pages contain architecture/mechanism diagrams with enough labels to explain how the system works.
+- Technical-construction pages use left visual/right explanation unless another structure is clearly better. Overall architecture pages should not be diagram-only; they need an explanatory text panel.
+- Technical-construction and key-technology pages contain architecture/mechanism diagrams with enough labels to explain how the system works.
+- Key-technology pages explicitly connect scenario failure -> mechanism -> objects/APIs -> execution/process landing -> metric/benchmark.
+- Execution-strategy pages name the modification target or implementation foundation and explain what changes, where it integrates, and how it is staged.
+- Validation pages bind KPIs to concrete benchmarks, task sets, fault injection cases, customer pilots, or operational traces. Do not present abstract metrics without measurement surfaces.
 - Key-technology pages are technical-design-grade: they show the problem being solved, modules, interfaces/objects, flow, mechanisms, state, failure handling, evaluation method, quantified targets, competitive threshold, and development implications.
 - Normal content boxes use gray outlines; red is reserved for thesis, arrows, selected labels, and restrained conclusion treatments.
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
