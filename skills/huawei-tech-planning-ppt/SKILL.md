@@ -13,6 +13,19 @@ The core pattern is:
 强场景/行业/技术/友商/客户洞察 -> 洞察总结 -> 技术构想 -> 总体架构 -> 关键技术 -> 执行策略 -> 验证闭环 -> 可选开发任务书
 ```
 
+This is one integrated skill with multiple stages, not a set of separate commands. Route the user to the right stage by intent:
+
+```text
+做技术规划PPT / 从零开始 / 30-40页 -> Stage 1 Frame, then research, claims, slide plan, imagegen PPTX
+只做调研 / deep research / 五看分析 -> Stage 2-3 Insight Agenda and Insight Research
+确认观点 / 共创观点 / 先别生成PPT -> Stage 3.5 Content Co-Creation Gate
+写页稿 / 生成PPT / 用imagegen -> Stage 5-7 Deck Spec, Slide Plan, Generate
+修改某页 / 补客户分析 / 重生成第N页 -> Stage 8 Revise, returning to earlier stages if the argument changes
+写任务书 / 交给Codex继续开发 / 基于规划做实际开发 -> Stage 9 Development Taskbook
+```
+
+Do not ask the user to name stages. Infer the stage from natural language, then state the current stage briefly in the visible plan.
+
 For deep technical planning, assume the deck is meant to guide 2-3 years of technical construction, not just explain a product. Default to a 30-40 page structure unless the user asks for a short deck:
 
 ```text

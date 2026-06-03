@@ -43,6 +43,42 @@ Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT，30
 Use $designer-toy-concept-ppt 帮我做一个 XXX 主题的概念 PPT，保持“洞察 -> 策略”的叙事结构，用 imagegen 生成整页图片页并合成 PPTX。视觉采用原创潮玩盲盒角色 + 可选开放授权素材，中低信息密度，每页一个主观点、一个主视觉和 2-4 个信息块。
 ```
 
+## huawei-tech-planning-ppt 的阶段触发方式
+
+`huawei-tech-planning-ppt` 是一个完整工作流 skill，不需要用户记住内部 Stage 名称。你只要用自然语言说明当前想做哪一步，Codex 会自动进入对应阶段。
+
+### 1. 从零开始做完整技术规划 PPT
+
+```text
+Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT，30-40 页，先做深度调研和观点共创，再用 imagegen 生成高信息密度整页 PPT。
+```
+
+### 2. 只做深度调研，暂不生成 PPT
+
+```text
+Use $huawei-tech-planning-ppt 围绕 XXX 做 deep research，重点看市场、客户、竞争、生态、学术，先沉淀 research 和 planning 材料，暂不生成 PPT。
+```
+
+### 3. 基于已有项目继续补充分析
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 继续补充客户分析、买点分析和技术趋势分析，并更新已有观点和页稿。
+```
+
+### 4. 局部修改或重生成某一页
+
+```text
+Use $huawei-tech-planning-ppt 修改 outputs/xxx 第 12 页的观点和 imagegen prompt，并只重生成这一页后重建 PPTX。
+```
+
+### 5. 从 PPT 规划转成 Codex 开发任务书
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 的规划成果，生成交给 Codex 继续开发的任务书，目标 repo 是 /path/to/repo1 和 /path/to/repo2。
+```
+
+这个阶段会把 `research/`、`planning/` 和页稿里的洞察、架构、关键技术、执行策略，转成 `planning/codex-dev-taskbook.md`，用于后续实际开发。
+
 ## Claude Code 是否能用
 
 可以用，但能力边界不同：
