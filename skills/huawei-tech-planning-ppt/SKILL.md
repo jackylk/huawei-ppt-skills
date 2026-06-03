@@ -10,7 +10,7 @@ Use this skill for Chinese enterprise technical-planning decks where the job is 
 The core pattern is:
 
 ```text
-强场景/行业/技术/友商/客户洞察 -> 洞察总结 -> 技术构想 -> 总体架构 -> 关键技术 -> 执行策略 -> 验证闭环
+强场景/行业/技术/友商/客户洞察 -> 洞察总结 -> 技术构想 -> 总体架构 -> 关键技术 -> 执行策略 -> 验证闭环 -> 可选开发任务书
 ```
 
 For deep technical planning, assume the deck is meant to guide 2-3 years of technical construction, not just explain a product. Default to a 30-40 page structure unless the user asks for a short deck:
@@ -152,6 +152,7 @@ Updated Plan
   □ 形成40页详细页稿和 imagegen 提示词
   □ 生成高密度 imagegen 页面并合成 PPTX
   □ 检查 contact sheet、素材可复用性和交付说明
+  □ 可选：基于规划成果生成给 Codex 执行的开发任务书
 ```
 
 Keep the plan specific to the current deck. Do not leave generic tasks like "do research"; name the actual research domains or source groups when known.
@@ -261,6 +262,24 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - If the user adds new information after a first version, run incremental research for the affected section, add sources to the existing research directory, update the synthesis/claims, then revise only affected slide briefs and prompts.
    - Preserve old versions unless the user asks to overwrite. Use versioned folders or filenames when making substantial revisions.
    - Use `references/revision-flow.md` for routing.
+
+### Stage 9: Development Taskbook
+
+   - Use this stage when the user asks whether the technical planning output can guide real development, asks to hand the plan to Codex, asks for a taskbook/任务书/开发计划, or names concrete target repositories or systems to modify.
+   - Do not turn every PPT into a taskbook by default. Offer or run this stage after the deck is complete, or whenever the user explicitly wants implementation follow-through.
+   - Reuse the accumulated project workspace instead of starting from memory. Read the relevant files under `outputs/<deck-name>/research/`, `outputs/<deck-name>/planning/`, and `outputs/<deck-name>/prompts/`.
+   - If target code repositories are named, inspect their current structure and `git status` before writing the taskbook. The taskbook should tell the next Codex to protect unrelated dirty changes and to start with a repo audit.
+   - Convert the PPT planning chain into executable engineering work:
+     - insight claims -> product/technical requirements
+     - target architecture -> object model, module boundaries, APIs, data flows
+     - key technology pages -> technical mechanisms, implementation tasks, metrics, tests
+     - execution strategy -> phases, milestones, dependencies, risks
+     - validation pages -> benchmark, smoke tests, regression tests, acceptance gates
+   - Output a reviewable file such as `planning/codex-dev-taskbook.md` or `planning/codex-dev-taskbook-<target>.md`.
+   - The taskbook must be specific enough that a fresh Codex can begin real development without rereading the entire PPT deck. It must name target repos, important files/modules when discoverable, phases, MVP scope, interfaces/objects, tests, and acceptance criteria.
+   - If the current PPT project has no concrete implementation target, write the taskbook as an engineering-discovery brief and clearly mark the open questions that must be resolved before coding.
+   - Include a "给后续 Codex 的启动提示" section that the user can copy into a new Codex session.
+   - Use `references/development-taskbook.md` for the required structure.
 
 For the detailed question bank, use `references/question-flow.md`.
 
@@ -548,6 +567,7 @@ outputs/<deck-name>/
     insight-claims.md
     strategy-claims.md
     slide-plan.md
+    codex-dev-taskbook.md
   prompts/
     slide-01.md
     slide-02.md
@@ -570,6 +590,7 @@ The user must be able to review and modify:
 - synthesized viewpoints
 - per-slide claim/layout/source notes
 - per-slide imagegen prompt
+- optional development taskbook for Codex execution
 
 If the user edits `prompts/slide-12.md`, regenerate slide 12 from that prompt, replace `imagegen/images/slide-12.png` or write a versioned image, rebuild the PPTX, and regenerate the contact sheet. This is a good method for imagegen decks because it makes the otherwise hidden prompt layer explicit and reviewable.
 
@@ -581,6 +602,8 @@ new user information -> incremental research -> material index -> synthesis -> s
 
 Use incremental updates instead of restarting. Add new sources and conclusions into the existing research/material directories so future revisions continue from the accumulated evidence base.
 
+If the user wants to move from planning to implementation, generate or update `planning/codex-dev-taskbook.md` from the existing workspace. Do not ask the next Codex to "read everything and figure it out"; extract the actionable development thesis, target repos, module candidates, API/object model, phased implementation plan, tests, and acceptance gates.
+
 ## Delivery Summary Checklist
 
 When delivering a generated deck, do not only provide the PPTX path. Always include:
@@ -591,6 +614,7 @@ When delivering a generated deck, do not only provide the PPTX path. Always incl
 - **Reusable materials:** paths such as `research/material-index.md`, `research/source-registry.json`, screenshots/product screenshots, extracts, and synthesis files.
 - **Editable thinking layer:** paths such as `planning/slide-plan.md`, `planning/insight-claims.md`, `planning/strategy-claims.md`.
 - **Imagegen inputs:** `prompts/slide-XX.md` or equivalent per-slide prompt files.
+- **Optional development taskbook:** if generated, path to `planning/codex-dev-taskbook.md` or equivalent, and the copyable prompt for starting a new Codex development session.
 - **How to iterate:** explicitly tell the user they can edit a prompt or slide brief and ask to regenerate only that page, or provide new analysis/source material for incremental research and section-level revision.
 
 Example delivery wording:
