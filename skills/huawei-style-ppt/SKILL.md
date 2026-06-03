@@ -5,7 +5,9 @@ description: "Create Huawei-style enterprise technical presentation decks and sl
 
 # Huawei-Style PPT
 
-Use this skill to create Chinese enterprise technical-report slides in a Huawei-like white/red style, usually by generating full-slide PNGs with `imagegen` and assembling them into a 16:9 PPTX.
+Use this skill to create Chinese enterprise technical-report slides in a Huawei-like white/red style by generating full-slide PNGs with `imagegen` and assembling them into a 16:9 PPTX.
+
+This skill has one output mode: **full-page imagegen slides assembled into PPTX**. Do not switch to editable/native PPTX, hybrid rebuilds, or native PowerPoint shape/text generation inside this skill. If the user asks for editable PPT, explain that this skill is optimized for full-page imagegen output and suggest using a separate editable-PPT workflow.
 
 ## Workflow
 
@@ -17,7 +19,7 @@ Use this skill to create Chinese enterprise technical-report slides in a Huawei-
 6. Use `scripts/make_image_pptx.py` to place one PNG full-bleed on each PPT slide.
 7. Report the PPTX path and the image folder path.
 
-For production decks where text correctness matters, prefer generating visual pages with limited text and then rebuilding the final deck with editable text using the Presentations skill. Imagegen can distort small Chinese text.
+For production decks where text correctness matters, keep the page as full-slide imagegen output, but make the prompt more explicit, regenerate weak pages, and inspect the contact sheet. Do not rebuild the deck as editable native PowerPoint inside this skill.
 
 ## Style Rules
 
@@ -80,12 +82,15 @@ python ~/.codex/skills/huawei-style-ppt/scripts/make_image_pptx.py \
 
 The script sorts image filenames lexicographically, so use zero-padded names like `slide-01.png`.
 
+If `python-pptx` is unavailable, use another packaging tool only to place each generated PNG full-bleed on a blank 16:9 slide. A packaging fallback must not become a native editable PPTX rebuild.
+
 ## Checks
 
 Before final delivery, verify:
 
 - The PPTX has the expected slide count.
 - Slides are 16:9.
+- Final PPTX pages are full-slide image pages; do not silently substitute editable/native PowerPoint shapes.
 - No slide has accidental title numbering.
 - Normal content boxes are gray, not red.
 - Red is restrained: no thick red boxes, no large solid red panels, no repeated red containers.

@@ -1,5 +1,0 @@
-interface:
-  display_name: "Global Tech Strategy PPT"
-  short_description: "Insight-to-architecture global strategy decks"
-  brand_color: "#1D4ED8"
-  default_prompt: "Use $global-tech-strategy-ppt to build a high-density Chinese technical planning PPT with global technology strategy consulting style."

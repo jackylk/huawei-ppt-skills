@@ -183,6 +183,8 @@ Asset rule: original generated / open asset / user-provided authorized
 
 Generate each final slide as one full-slide imagegen PNG. This skill has one output path: **full-page imagegen slides assembled into PPTX**.
 
+Do not switch to editable/native PPTX, hybrid rebuilds, or native PowerPoint shape/text generation inside this skill. The visual quality, mascot design, cards, diagrams, and page composition must be created as full-slide imagegen pages. If the user asks for editable PPT, explain that this skill is optimized for full-page imagegen output and suggest a separate editable-PPT workflow.
+
 Each prompt must specify:
 
 ```text
@@ -205,6 +207,7 @@ Text legibility requirements
 - Save prompts under `prompts/slide-XX.md`.
 - Copy generated images into `images/slide-XX.png`.
 - Package full-bleed image slides into a 16:9 PPTX using `scripts/make_image_pptx.py`.
+- If `python-pptx` is unavailable, use another packaging tool only to place each generated image full-bleed on a blank 16:9 slide. Do not substitute native editable PPT shapes/text for imagegen pages.
 - Generate a contact sheet and inspect for: text readability, style consistency, non-infringing original characters, and enough content to carry the point.
 
 ### Stage 6: Iterate
@@ -268,4 +271,3 @@ Before delivery:
 - Page density matches the user's selected density.
 - Prompts, images, contact sheet, and PPTX are all saved in the workspace.
 - Delivery summary explains where the user can inspect/edit prompts and how to regenerate selected pages.
-
