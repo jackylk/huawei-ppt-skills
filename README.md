@@ -85,6 +85,19 @@ Use $huawei-tech-planning-ppt 基于 outputs/xxx 的规划成果，生成交给 
 
 这个阶段会把 `research/`、`planning/` 和页稿里的洞察、架构、关键技术、执行策略，转成 `planning/codex-dev-taskbook.md`，用于后续实际开发。
 
+### 6. 生成讲解音频或教学视频
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 生成这个技术规划 PPT 的讲解包：先写口播稿，再生成 30 秒教学风格讲解视频。重点讲场景、挑战、目标架构、关键技术和用户价值。
+```
+
+视频生成建议：
+
+- 技术规划视频优先用“教学风格”，以讲清楚为第一目标，不追求炫酷背景。
+- Seedance 等视频模型适合生成氛围、旁白和简化教学画面，但不应负责渲染复杂架构图和关键术语。
+- 如果架构和文字必须准确，先生成无文字背景，再由 Codex 本地生成 overlay 图层，用 `ffmpeg` 合成。
+- 对较长视频，按 15 秒片段拆分生成，再拼接；保存每段 prompt、任务 ID 和 QA 截图。
+
 ## Claude Code 是否能用
 
 可以用，但能力边界不同：
