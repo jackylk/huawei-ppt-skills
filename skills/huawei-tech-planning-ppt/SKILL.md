@@ -314,10 +314,10 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
      - user value: what becomes measurably better for users/customers
    - If the user says "不要讲改造点" or wants an intro video, emphasize architecture and user value instead of implementation details.
    - Use video-model generation carefully:
-     - Seedance can generate visual atmosphere and spoken video directly, but it may hallucinate text, misspell English terms, or draw wrong architecture.
-     - Do not rely on Seedance or any video model to render precise architecture diagrams, API names, product names, or dense technical text.
-     - If exact text or architecture must be correct, generate a text-free or low-text background video, then render accurate diagrams/labels locally as overlay PNGs and compose with `ffmpeg`.
-     - For direct Seedance technical explainer videos, keep on-screen text minimal, large, and non-critical; put precision in the narration and local artifacts.
+     - If the user asks to use Seedance, generate the final video end-to-end with Seedance.
+     - Seedance may hallucinate text, misspell English terms, or draw wrong architecture. Reduce this risk through prompt design: use minimal on-screen text, large simple labels, simple diagrams, and narration to carry precise meaning.
+     - Avoid asking Seedance to render dense architecture diagrams, API names, product names, or small technical text. Prefer a few simple visual metaphors: scenario cards, three-layer architecture blocks, capability icons, and value checkpoints.
+     - If the user reports wrong architecture or text, revise the Seedance prompt to simplify the visuals and regenerate the affected segment.
    - For Seedance 2.0 text-to-video, assume one task may only support short clips such as 15 seconds. For longer videos, split into multiple 15-second segments, then concatenate with `ffmpeg`. Save each segment prompt and task metadata.
    - If using Fire/Volcano/Bytedance TTS, distinguish API keys:
      - Ark/Seedance video API keys may not work for speech synthesis.
@@ -333,7 +333,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - QA the video before delivery:
      - verify duration, resolution, audio stream, and file size with `ffprobe`
      - inspect representative frames for wrong text, wrong architecture, distracting backgrounds, unwanted logos, labels such as `Part 2 v2`, and layout issues
-     - if the user reports wrong architecture or text, fix through local overlay or simpler teaching visuals instead of repeatedly asking the video model to draw the same precise diagram
+     - if the user reports wrong architecture or text, simplify the Seedance prompt and regenerate the affected segment; keep Seedance responsible for the final video
 
 For the detailed question bank, use `references/question-flow.md`.
 
