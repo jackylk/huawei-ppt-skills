@@ -22,7 +22,7 @@ This is one integrated skill with multiple stages, not a set of separate command
 写页稿 / 生成PPT / 用imagegen -> Stage 5-7 Deck Spec, Slide Plan, Generate
 修改某页 / 补客户分析 / 重生成第N页 -> Stage 8 Revise, returning to earlier stages if the argument changes
 写任务书 / 交给Codex继续开发 / 基于规划做实际开发 -> Stage 9 Development Taskbook
-生成讲解音频 / 讲解视频 / Seedance视频 / 教学视频 -> Stage 10 Narration and Video Package
+生成讲解音频 / 讲解视频 / Seedance视频 / 技术讲解视频 -> Stage 10 Narration and Video Package
 ```
 
 Do not ask the user to name stages. Infer the stage from natural language, then state the current stage briefly in the visible plan.
@@ -297,7 +297,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 
 ### Stage 10: Narration and Video Package
 
-   - Use this stage when the user asks to generate a PPT narration, talk track, audio explanation, subtitles, explainer video, Seedance video, or a teaching-style video for an existing technical-planning PPT workspace.
+   - Use this stage when the user asks to generate a PPT narration, talk track, audio explanation, subtitles, explainer video, Seedance video, or a technical explainer video for an existing technical-planning PPT workspace.
    - This stage should reuse the existing `outputs/<deck-name>/research/`, `planning/`, `prompts/`, `imagegen/images/`, and PPTX content. Do not rewrite the strategy from scratch.
    - Output under `outputs/<deck-name>/narration/`:
      - `speaker-notes.md` or `talk-track.md`
@@ -305,7 +305,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
      - `audio/` for TTS outputs
      - `video/` for generated video, prompts, storyboard, subtitles, task metadata, and rendered checks
    - First create a human-reviewable narration script. For technical planning decks, rewrite slide claims into spoken language; do not simply read slide text. Use short sentences, explicit transitions, and one idea per breath.
-   - Prefer **teaching style** for technical planning videos: plain background, stable composition, clear diagrams, accurate labels, restrained motion, and narration that explains the logic. Avoid flashy dynamic backgrounds when the goal is to make the PPT understandable.
+   - Prefer a **restrained technology style** for technical planning videos: modern technical atmosphere, stable composition, clear diagrams, accurate labels, restrained motion, and narration that explains the logic. Avoid flashy dynamic backgrounds that interfere with understanding.
    - For a 30-60 second overview video, use this default storyline:
      - scenario: what strong customer/workflow scenario triggered the planning
      - challenge: what breaks in the old architecture or workflow
@@ -317,7 +317,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
      - Seedance can generate visual atmosphere and spoken video directly, but it may hallucinate text, misspell English terms, or draw wrong architecture.
      - Do not rely on Seedance or any video model to render precise architecture diagrams, API names, product names, or dense technical text.
      - If exact text or architecture must be correct, generate a text-free or low-text background video, then render accurate diagrams/labels locally as overlay PNGs and compose with `ffmpeg`.
-     - For direct Seedance teaching videos, keep on-screen text minimal, large, and non-critical; put precision in the narration and local artifacts.
+     - For direct Seedance technical explainer videos, keep on-screen text minimal, large, and non-critical; put precision in the narration and local artifacts.
    - For Seedance 2.0 text-to-video, assume one task may only support short clips such as 15 seconds. For longer videos, split into multiple 15-second segments, then concatenate with `ffmpeg`. Save each segment prompt and task metadata.
    - If using Fire/Volcano/Bytedance TTS, distinguish API keys:
      - Ark/Seedance video API keys may not work for speech synthesis.
@@ -650,7 +650,7 @@ The user must be able to review and modify:
 - per-slide claim/layout/source notes
 - per-slide imagegen prompt
 - optional development taskbook for Codex execution
-- optional narration scripts, audio, subtitles, video prompts, video task metadata, and rendered teaching/explainer videos
+- optional narration scripts, audio, subtitles, video prompts, video task metadata, and rendered technical explainer videos
 
 If the user edits `prompts/slide-12.md`, regenerate slide 12 from that prompt, replace `imagegen/images/slide-12.png` or write a versioned image, rebuild the PPTX, and regenerate the contact sheet. This is a good method for imagegen decks because it makes the otherwise hidden prompt layer explicit and reviewable.
 
@@ -664,7 +664,7 @@ Use incremental updates instead of restarting. Add new sources and conclusions i
 
 If the user wants to move from planning to implementation, generate or update `planning/codex-dev-taskbook.md` from the existing workspace. Do not ask the next Codex to "read everything and figure it out"; extract the actionable development thesis, target repos, module candidates, API/object model, phased implementation plan, tests, and acceptance gates.
 
-If the user wants audio or video explanation, generate or update `narration/` from the existing workspace. Keep narration scripts editable and separate from final media. For technical videos, default to teaching clarity over cinematic effects.
+If the user wants audio or video explanation, generate or update `narration/` from the existing workspace. Keep narration scripts editable and separate from final media. For technical videos, default to a clear, restrained technology style over cinematic effects.
 
 ## Delivery Summary Checklist
 
