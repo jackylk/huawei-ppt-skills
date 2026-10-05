@@ -30,7 +30,7 @@ mkdir -p ~/.codex/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.codex/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.codex/skills/
 cp -R huawei-ppt-skills/skills/designer-toy-concept-ppt ~/.codex/skills/
-python3 -m pip install python-pptx
+python3 -m pip install python-pptx Pillow
 ```
 
 安装后重启 Codex，让 Codex 重新发现 skills。
@@ -119,10 +119,12 @@ cp -R huawei-ppt-skills/skills/designer-toy-concept-ppt ~/.claude/skills/
 
 技术规划类 skill 带有 `scripts/make_image_pptx.py`，用于把一组 `slide-01.png`、`slide-02.png` 图片页打包成 16:9 PPTX。
 
+`huawei-style-ppt` 和 `huawei-tech-planning-ppt` 还带有 `scripts/embed_source_figures.py`：需要保留论文原图、官方图表或截图时，先保存原始素材，ImageGen 生成整页并预留图位，再按坐标将原图嵌入最终 PNG。PPTX 仍是每页一张整页图片；详见各 skill 的说明。
+
 依赖：
 
 ```bash
-python3 -m pip install python-pptx
+python3 -m pip install python-pptx Pillow
 ```
 
 ## 技术规划 PPT 的迭代工作区

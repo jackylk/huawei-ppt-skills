@@ -16,7 +16,8 @@ Use after a first PPT/contact sheet exists. Classify feedback before editing.
 - **路线图不实:** revise phases, milestones, KPI gates, dependencies, and delivery constraints.
 - **策略总结不聚焦:** decide whether the final page should be roadmap, KPI gates, investment priorities, or executive ask.
 - **风格不像参考:** re-open reference samples; extract layout and writing form, not domain-specific nouns.
-- **文字不准或要交付编辑:** switch to editable or hybrid route for affected slides.
+- **文字不准:** revise the prompt and regenerate affected slides; if labels belong to an original figure, re-embed the saved figure after regeneration.
+- **要交付可编辑 PPT:** explain that this skill produces image-based pages and use a separate editable-PPT workflow if the user requests it.
 
 ## Revision Response Pattern
 

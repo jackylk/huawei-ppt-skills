@@ -14,12 +14,31 @@ This skill has one output mode: **full-page imagegen slides assembled into PPTX*
 1. Clarify the deck outline, audience, and slide count if not already clear.
 2. Draft each slide as a concise message: title, claim, main proof object, layout zones, and bottom viewpoint.
 3. Generate each slide as a 16:9 PNG with `imagegen`.
-4. Inspect a contact sheet or thumbnails before packaging when there are more than 3 slides.
-5. Copy final PNGs into the project output directory.
-6. Use `scripts/make_image_pptx.py` to place one PNG full-bleed on each PPT slide.
+4. When an exact paper figure, chart, or official screenshot must appear, embed the saved original in a reserved box on that PNG using `scripts/embed_source_figures.py`.
+5. Inspect the final slide images, including the embedded figures; use a contact sheet when there are more than 3 slides.
+6. Copy final PNGs into the project output directory and use `scripts/make_image_pptx.py` to place one PNG full-bleed on each PPT slide.
 7. Report the PPTX path and the image folder path.
 
 For production decks where text correctness matters, keep the page as full-slide imagegen output, but make the prompt more explicit, regenerate weak pages, and inspect the contact sheet. Do not rebuild the deck as editable native PowerPoint inside this skill.
+
+## Exact Source Figures
+
+ImageGen may use a reference image to guide composition, but it can redraw labels, numbers, or arrows. When the user wants the **original** paper figure, chart, or official screenshot, save the source asset locally with its URL, figure/page identifier, and access date. Reserve a plain rectangular image area in the full-slide prompt. Generate the whole page first, then programmatically place the saved source image into that area of the slide PNG. This keeps the final PPTX as one flattened image per slide. Do not call an ImageGen recreation an original figure.
+
+Use pixel coordinates from the generated slide. The JSON paths are relative to the placement file:
+
+```json
+[{"source":"../research/figures/paper-fig-2.png","box":[100,280,800,720],"padding":12,"background":"#FFFFFF"}]
+```
+
+```bash
+python ~/.codex/skills/huawei-style-ppt/scripts/embed_source_figures.py \
+  --base outputs/<deck-name>/imagegen/slide-01-generated.png \
+  --placements outputs/<deck-name>/prompts/slide-01-figures.json \
+  --output outputs/<deck-name>/images/slide-01.png
+```
+
+The helper requires Pillow. Keep the unaltered ImageGen output and source asset for later revisions. After every regeneration of the page, embed the source again. Check that the figure is legible, uncropped, and attributed in the slide/source notes before packaging.
 
 ## Style Rules
 

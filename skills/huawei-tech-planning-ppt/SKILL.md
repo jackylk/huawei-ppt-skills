@@ -257,11 +257,11 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
 
 ### Stage 7: Generate
 
-   - Generate every final slide as one full-slide imagegen PNG. This skill has one output path: full-page imagegen slides assembled into PPTX.
-   - Do not switch to editable/native PPTX, hybrid rebuilds, or post-composited page construction just because a packaging dependency is missing.
+   - Generate every slide as one full-slide imagegen PNG. If exact source figures are needed, embed the saved originals into reserved regions of that PNG before packaging; the PPTX still contains one flattened full-page image per slide. Follow `references/research-assets.md`.
+   - Do not switch to editable/native PPTX or native PowerPoint page reconstruction because a packaging dependency is missing.
    - For imagegen decks, write one prompt file per slide before generation. Use stable filenames such as `prompts/slide-01.md` or `prompts/slide-01.json`.
    - Each per-slide prompt must be a full page specification, not a short title/claim stub. It must include title, subtitle, page layout zones, concrete diagram/table contents, evidence/source blocks, bottom viewpoint, and visual density instructions.
-   - Before generating, create `outputs/<deck-name>/imagegen/images/`. After each imagegen call, immediately copy or move the resulting slide image into that workspace directory with a stable name such as `slide-01.png`. Do not leave final slide images only in `~/.codex/generated_images` or any other hidden/global cache directory.
+   - Before generating, create `outputs/<deck-name>/imagegen/images/`. After each imagegen call, immediately copy or move the result into the deck workspace. Place the final image (after source-figure embedding, when needed) in `imagegen/images/` with a stable name such as `slide-01.png`. Do not leave final slide images only in `~/.codex/generated_images` or another hidden/global cache directory.
    - Keep the prompt files next to the deck workspace. Do not leave the only prompt copy hidden in the chat transcript.
    - Render a contact sheet and inspect against the quality gates before delivery. ImageMagick is optional; if it is unavailable, use `sips`, Python/Pillow, Node/canvas, or another local image tool. Do not skip visual QA just because ImageMagick is missing.
    - In the delivery summary, always tell the user where the source workspace is, where the reusable materials are, where the slide plan and per-slide prompts are, and how to request an incremental revision.
@@ -272,7 +272,7 @@ Keep the plan specific to the current deck. Do not leave generic tasks like "do 
    - First classify the user feedback: insight scope, source evidence, claim spine, architecture, architecture competitiveness, key technology, roadmap, visual style, text accuracy, or output format.
    - If the feedback changes the argument, return to the relevant agenda/spec stage before regenerating.
    - If the feedback is local visual/text polish, revise only the affected slide(s).
-   - If the user edits a page prompt or slide brief, regenerate that page from the edited artifact, then rebuild the PPTX and contact sheet.
+   - If the user edits a page prompt or slide brief, regenerate that page from the edited artifact, re-embed any exact source figures, then rebuild the PPTX and contact sheet.
    - If the user adds new information after a first version, run incremental research for the affected section, add sources to the existing research directory, update the synthesis/claims, then revise only affected slide briefs and prompts.
    - Preserve old versions unless the user asks to overwrite. Use versioned folders or filenames when making substantial revisions.
    - Use `references/revision-flow.md` for routing.
@@ -583,13 +583,13 @@ After the user answers, ask the next stage about the strong scenario wedge, targ
 
 This skill has one output mode: **full-page imagegen slides assembled into a 16:9 PPTX**.
 
-- Generate each final slide as a complete full-slide PNG with imagegen. The whole page layout, diagrams, callouts, viewpoint boxes, and visual composition belong in the imagegen prompt.
+- Generate the full-slide PNG with imagegen. The whole page layout, diagrams, callouts, viewpoint boxes, and visual composition belong in the imagegen prompt. Exact source figures may be composited into reserved regions of that PNG afterward.
 - Keep the thinking layer editable through `planning/*.md` and `prompts/slide-XX.md`; the final PPT pages themselves are image-based.
 - Do not offer or choose editable/native PPTX, hybrid rebuilds, or native-shape alternatives inside this skill.
 - Make the cover visually cleaner than body pages: main title, subtitle, date/author metadata, and at most 2-3 small scenario/topic cards. Do not put architecture diagrams, object chips, evidence boards, logo strips, or KPI matrices on the cover. Use `references/style-guide.md` section "Clean Technical Cover" when writing the cover prompt.
 - Do not put slide numbers inside the generated page image. In particular, never generate a large top-left number block such as `04.` or `12.`. If page numbers are needed, they should be added later by the PPTX wrapper/footer, not by imagegen.
 - If the user asks for editable-native PPT, explain that this skill is optimized for full-page imagegen output and suggest a separate editable-PPT workflow.
-- If the deck contains competitor evidence, still produce the final page through imagegen as a whole page. Use official screenshots/charts as source references when the image tool supports references; otherwise represent evidence with clearly labeled source blocks, redrawn mechanisms, and source notes. Do not fabricate competitor product UIs and call them screenshots.
+- If the deck contains competitor or academic evidence, generate the full-page layout through imagegen. For an exact official screenshot, chart, or paper figure, save the source and embed it into the final PNG as described in `references/research-assets.md`. Use references only to guide composition; ImageGen redraws are not original figures. If no suitable original asset is available, use a clearly labeled redrawn mechanism or source block.
 - Do not ask imagegen to invent, approximate, redraw, or decorate pages with company/product logos. Product and tool names such as `MLflow`, `LangGraph`, or `Databricks` may appear as plain text labels. Official screenshots or charts may retain their original logos when used as attributed source evidence.
 
 Packaging discipline:
@@ -613,6 +613,7 @@ outputs/<deck-name>/
     raw/
     extracts/
     screenshots/
+    figures/
     product-screenshots/
     quotes.md
     synthesis.md
@@ -846,7 +847,7 @@ Rules:
 - Original evidence proves what the competitor publicly shows.
 - Redrawn diagrams explain what the competitor is technically doing.
 - The right side answers "so what should we learn or counter?"
-- Final pages are still generated as whole pages by imagegen. If exact official screenshots must appear, use them as image references when supported; otherwise label source evidence clearly and redraw the mechanism instead of fabricating UI screenshots.
+- Generate the whole page layout with imagegen. If an exact official screenshot must appear, embed its saved original into the reserved region of the final PNG; an image reference alone does not guarantee fidelity. Otherwise label source evidence clearly and redraw the mechanism instead of fabricating UI screenshots.
 - If only web page screenshots are available, label them as page evidence. Do not call them product UI screenshots.
 
 ## Technical Insight Page Template
@@ -1327,7 +1328,7 @@ outputs/<deck-name>/imagegen/images/slide-01.png
 outputs/<deck-name>/imagegen/images/slide-02.png
 ```
 
-The slide images used for packaging and delivery must live in this deck workspace. If the image tool initially writes to `~/.codex/generated_images` or another temporary/cache directory, copy or move the selected final image into `outputs/<deck-name>/imagegen/images/` immediately and use only the workspace copy for PPTX packaging, contact sheets, QA, and delivery summaries.
+The slide images used for packaging and delivery must live in this deck workspace. If the image tool initially writes to `~/.codex/generated_images` or another temporary/cache directory, copy or move it into the workspace immediately. For pages with exact source figures, keep the raw generation separately and place the composited final PNG in `imagegen/images/`. Use only final workspace PNGs for PPTX packaging, contact sheets, QA, and delivery summaries.
 
 Then run:
 
@@ -1367,6 +1368,7 @@ Before delivery:
 - Red must feel like Huawei-style emphasis, not a warning poster: avoid thick red boxes, solid red panels, and overusing red on every container.
 - No colored title, no black title panel, no decorative gradient/orbs, no fake Huawei logo, and no generated/approximate third-party logos. Use plain text names for tools/products unless an official sourced screenshot/chart already contains the logo.
 - Imagegen output: inspect generated images; reject slides with garbled Chinese or unreadable small labels.
+- If a slide claims to show an original paper figure, chart, or official screenshot, verify that the final PNG actually contains the saved source image rather than an ImageGen redraw. Check figure labels at zoom, attribution, and that every regenerated page has been re-embedded.
 - Any slide showing paper year, author, institution, venue, DOI, or arXiv id must trace to a verified source id in the research registry. If metadata is uncertain, regenerate the slide with paper/direction cards and technical implications instead of guessed author/year details.
 - Contact sheet creation is mandatory, but ImageMagick is not. Use ImageMagick, `sips`, Python/Pillow, Node/canvas, or a temporary local image script to assemble the overview without modifying original slide images.
 - Contact sheet inspection rejects sparse pages, text-light pages, pages without real proof objects, and pages with excessive empty whitespace.
