@@ -1,150 +1,128 @@
 # Huawei PPT Skills
 
-这是三个可复用的中文 PPT skills，适合在 Codex 中做企业汇报页、技术规划页、架构页、概念故事页和 imagegen 图片页 PPTX。
+面向中文企业汇报与技术规划的两个 Codex skills，通过 imagegen 生成整页图片并组装为 16:9 PPTX。
 
-如果这个仓库对你或同事有帮助，欢迎顺手点一个 Star，不要吝啬 ：）
+## 选择 Skill
 
-## 包含的 Skill
+| Skill | 适用任务 |
+| --- | --- |
+| [huawei-style-ppt](skills/huawei-style-ppt/SKILL.md) | 企业汇报、架构、机制、场景、比较表和路线图，支持**汇报版**与**生动版**。 |
+| [huawei-tech-planning-ppt](skills/huawei-tech-planning-ppt/SKILL.md) | 从深度调研、洞察与策略到技术规划 PPT，并可继续形成开发任务书和讲解包。 |
 
-- `huawei-style-ppt`：通用华为风格白/红/灰企业汇报页，适合做管理汇报、架构说明、能力矩阵、路线图等。
-- `huawei-tech-planning-ppt`：深度技术规划 PPT，强调“洞察 -> 策略”，包含深度调研、友商分析、客户/买点分析、关键技术展开、源码工作区和迭代修改流程。
-- `designer-toy-concept-ppt`：原创潮玩盲盒概念风 PPT，保持“洞察 -> 策略”的叙事结构，但默认中低信息密度，用原创潮玩角色、盲盒卡片、玩具实验室、能力货架等视觉表达概念、用户场景和产品愿景；可选 Open Peeps/OpenMoji/Twemoji/Blush 等开放素材，但不自动生成或仿制具体商业 IP。
+## 汇报版与生动版
 
-## huawei-tech-planning-ppt 工作流
+两种风格共用白底、黑标题、灰色结构和克制的红色强调，均输出整页图片式 PPTX。
 
-`huawei-tech-planning-ppt` 不是一次性生成 PPT 的模板，而是一个持续沉淀的技术规划工作区：先上网深度调研并保存素材，再提炼观点和叙事结构，用户反馈后继续补充证据与分析，确认后生成 imagegen PPT；后续还可以基于同一工作区输出交给 Codex/Coding Agent 的开发任务书。
+| 风格 | 适合表达什么 | 视觉特点 |
+| --- | --- | --- |
+| **汇报版（默认）** | 管理汇报、董事会规划、证据分析、能力矩阵 | 延续原有正式、克制的图表和结构化版式，以观点、证据与决策为中心。 |
+| **生动版** | 技术架构、协作流程、问题分析、业务场景 | 用人物、友好 Agent、文件、设备和系统说明角色、动作、信息流与价值，保留必要技术细节。 |
 
-![huawei-tech-planning-ppt workflow](assets/tech-planning-live-workspace.png)
+明确指定风格时直接采用；未指定且没有参考风格时默认汇报版。生动版不意味着每页都要加角色，也不意味着删减内容：完整方案表格仍可采用文字为主的版式。
 
-## 如何在 Codex 中安装
+生动版示例，依次为方案总览、可信整理机制、详细方案表格：
 
-> 请帮我安装这个 Codex skill 仓库：https://github.com/jackylk/huawei-ppt-skills 。如果我有访问权限，请 clone 到本地，把 `skills/huawei-style-ppt`、`skills/huawei-tech-planning-ppt` 和 `skills/designer-toy-concept-ppt` 复制到 `~/.codex/skills/`，安装 `python-pptx` 依赖，然后告诉我需要重启 Codex 才能使用。
+![生动版：总览、机制与详细表格](skills/huawei-style-ppt/assets/lively-examples.jpg)
 
-前提：这个仓库当前是私有仓库，同事需要先获得 GitHub 访问权限，并且本机 `git` 能拉取该仓库。
+详细规范：[汇报版](skills/huawei-style-ppt/references/style-guide.md) · [生动版](skills/huawei-style-ppt/references/lively-style.md)
 
-## Codex 手工安装
+### 使用示例
+
+```text
+Use $huawei-style-ppt 汇报版，做一份年度能力建设汇报，突出观点、证据、能力矩阵和路线图。
+```
+
+```text
+Use $huawei-style-ppt 生动版，做一份企业上下文平台架构 PPT。
+用具体的人物、Agent、文件和系统说明协作，标清外部查询、用户反馈和数据流。
+```
+
+```text
+Use $huawei-style-ppt 生动版，把七项挑战、具体处理方案和核心技术放在一页表格中。
+保留已经确认的完整处理过程，不要缩成短语；这页不需要人物插画。
+```
+
+修改已有 PPT 时，可以只重生成指定页面并重新打包，其余页面保持原样。
+
+## 技术规划工作流
+
+`huawei-tech-planning-ppt` 是保留原始研究、观点、页稿和提示词的持续工作区：
+
+**深度调研 → 洞察与策略 → 逐页规划 → imagegen 生成 → 反馈迭代 → 开发任务书或讲解包**
+
+![技术规划工作流](assets/tech-planning-live-workspace.png)
+
+按当前目标用自然语言发起即可：
+
+```text
+Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT。
+先明确写作方向、调研重点、已有观点、信息密度和决策用途，再深入调研、提炼策略并生成。
+关键技术要讲清问题、原理、模块/接口/流程、评价方法和量化目标。
+```
+
+```text
+Use $huawei-tech-planning-ppt 围绕 XXX 做深度调研，保存来源、截图、材料索引和研究综合，暂不生成 PPT。
+```
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 补充客户、买点和技术趋势分析，
+更新观点和页稿；只重生成受到影响的页面。
+```
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 的规划成果，
+生成交给 Codex 继续开发的任务书，目标 repo 是 /path/to/repo。
+```
+
+```text
+Use $huawei-tech-planning-ppt 基于 outputs/xxx 生成讲稿和技术讲解包。
+视频采用克制科技风，先讲清场景、挑战、架构、技术与价值，再按可用工具生成。
+```
+
+工作区通常保留：
+
+```text
+outputs/<deck-name>/
+  research/   # 原始资料、来源索引、截图与研究综合
+  planning/   # 观点、策略、slide plan、开发任务书
+  prompts/    # 每页 imagegen 输入
+  images/     # 最终页面图片
+  output/     # PPTX 与 contact sheet
+```
+
+通用 skill 的两种视觉版本不改变技术规划 skill 自己的调研流程；如需规划页复用生动版，可在请求中明确指定，并参照上述视觉规范。
+
+## 安装到 Codex
+
+可直接对 Codex 说：
+
+> 请安装 https://github.com/jackylk/huawei-ppt-skills 中的 huawei-style-ppt 和 huawei-tech-planning-ppt，复制到本机 skills 目录，检查 python-pptx 与 Pillow 依赖，并说明是否需要重启以重新发现技能。
+
+手工安装：
 
 ```bash
 git clone https://github.com/jackylk/huawei-ppt-skills.git
 mkdir -p ~/.codex/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.codex/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.codex/skills/
-cp -R huawei-ppt-skills/skills/designer-toy-concept-ppt ~/.codex/skills/
 python3 -m pip install python-pptx Pillow
 ```
 
-安装后重启 Codex，让 Codex 重新发现 skills。
+访问受限的仓库需要先获得权限。安装或更新后，重新启动会话或按客户端要求重新发现 skills。更新仓库不会自动同步已安装的技能副本。
 
-## Codex 使用示例
-
-```text
-Use $huawei-style-ppt 做一个华为风格企业汇报 PPT。
-```
-
-```text
-Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT，30-40 页，必须用 imagegen 生成整页高信息密度图片页并合成 PPTX。请先问我写作方向、调研重点、已有观点、信息密度和决策用途；调研要充分，观点要犀利，策略要能指导未来 2-3 年技术构建，关键技术页要写到技术设计级别，包括要解决的问题、技术原理、模块/接口/流程、评价方法和量化目标。
-```
-
-```text
-Use $designer-toy-concept-ppt 帮我做一个 XXX 主题的概念 PPT，保持“洞察 -> 策略”的叙事结构，用 imagegen 生成整页图片页并合成 PPTX。视觉采用原创潮玩盲盒角色 + 可选开放授权素材，中低信息密度，每页一个主观点、一个主视觉和 2-4 个信息块。
-```
-
-## huawei-tech-planning-ppt 的阶段触发方式
-
-`huawei-tech-planning-ppt` 是一个完整工作流 skill，不需要用户记住内部 Stage 名称。你只要用自然语言说明当前想做哪一步，Codex 会自动进入对应阶段。
-
-### 1. 从零开始做完整技术规划 PPT
-
-```text
-Use $huawei-tech-planning-ppt 帮我做一个 XXX 主题的技术规划 PPT，30-40 页，先做深度调研和观点共创，再用 imagegen 生成高信息密度整页 PPT。
-```
-
-### 2. 只做深度调研，暂不生成 PPT
-
-```text
-Use $huawei-tech-planning-ppt 围绕 XXX 做 deep research，重点看市场、客户、竞争、生态、学术，先沉淀 research 和 planning 材料，暂不生成 PPT。
-```
-
-### 3. 基于已有项目继续补充分析
-
-```text
-Use $huawei-tech-planning-ppt 基于 outputs/xxx 继续补充客户分析、买点分析和技术趋势分析，并更新已有观点和页稿。
-```
-
-### 4. 局部修改或重生成某一页
-
-```text
-Use $huawei-tech-planning-ppt 修改 outputs/xxx 第 12 页的观点和 imagegen prompt，并只重生成这一页后重建 PPTX。
-```
-
-### 5. 从 PPT 规划转成 Codex 开发任务书
-
-```text
-Use $huawei-tech-planning-ppt 基于 outputs/xxx 的规划成果，生成交给 Codex 继续开发的任务书，目标 repo 是 /path/to/repo1 和 /path/to/repo2。
-```
-
-这个阶段会把 `research/`、`planning/` 和页稿里的洞察、架构、关键技术、执行策略，转成 `planning/codex-dev-taskbook.md`，用于后续实际开发。
-
-### 6. 生成讲解音频或技术讲解视频
-
-```text
-Use $huawei-tech-planning-ppt 基于 outputs/xxx 生成这个技术规划 PPT 的讲解包：先写口播稿，再生成 30 秒克制科技风格讲解视频。重点讲场景、挑战、目标架构、关键技术和用户价值。
-```
-
-视频生成建议：
-
-- 技术规划视频优先用“克制科技风格”，以讲清楚为第一目标，不追求炫酷背景。
-- Seedance 等视频模型负责端到端生成视频；提示词要减少屏幕小字，使用简化架构、能力图标和自然旁白来承载精确信息。
-- 如果视频里架构或文字出错，优先简化 Seedance 提示词并重生成相关片段。
-- 对较长视频，按 15 秒片段拆分生成，再拼接；保存每段 prompt、任务 ID 和 QA 截图。
-
-## Claude Code 是否能用
-
-可以用，但能力边界不同：
-
-- Codex：可以完整使用，包括 imagegen 生成图片页、整理素材、打包 PPTX。
-- Claude Code：可以用于调研、观点提炼、slide plan 和 imagegen prompt 编写；如果没有图像生成工具，不能完整生成图片页。
-
-Claude Code 手工安装：
+## 在 Claude Code 中使用
 
 ```bash
-git clone https://github.com/jackylk/huawei-ppt-skills.git
 mkdir -p ~/.claude/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.claude/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.claude/skills/
-cp -R huawei-ppt-skills/skills/designer-toy-concept-ppt ~/.claude/skills/
 ```
 
-## PPTX 打包依赖
+完整生成图片页需要运行环境提供图像生成工具；没有工具时，可以编写页稿和提示词，但不能声称已经生成最终图片页。
 
-技术规划类 skill 带有 `scripts/make_image_pptx.py`，用于把一组 `slide-01.png`、`slide-02.png` 图片页打包成 16:9 PPTX。
+## 输出与原图保真
 
-`huawei-style-ppt` 和 `huawei-tech-planning-ppt` 还带有 `scripts/embed_source_figures.py`：需要保留论文原图、官方图表或截图时，先保存原始素材，ImageGen 生成整页并预留图位，再按坐标将原图嵌入最终 PNG。PPTX 仍是每页一张整页图片；详见各 skill 的说明。
-
-依赖：
-
-```bash
-python3 -m pip install python-pptx Pillow
-```
-
-## 技术规划 PPT 的迭代工作区
-
-`huawei-tech-planning-ppt` 和 `designer-toy-concept-ppt` 都会要求生成可复用的源码工作区，而不是只给一个最终 PPTX：
-
-```text
-outputs/<deck-name>/
-  research/   # 原始资料、摘录、截图、产品截图、素材索引、研究综合
-  planning/   # deck outline、洞察观点、策略观点、slide plan
-  prompts/    # 每页 imagegen 输入，如 slide-12.md
-  images/     # 生成后的每页图片
-  output/     # PPTX 和 contact sheet
-```
-
-用户可以看和改：
-
-- `research/material-index.md`：素材和来源索引
-- `planning/slide-plan.md`：每页观点、证据和版式
-- `prompts/slide-XX.md`：某页 imagegen 输入
-
-如果只改某一页，可以让 Codex 只重生成该页并重建 PPTX。  
-如果补充新的客户分析、技术趋势或友商信息，可以让 Codex 做增量调研，并合并到已有 `research/` 和 `planning/` 目录中。
+- PPTX 每页是一张整页图片，文字和图形不能逐项编辑；保留页稿、提示词及源素材以便修改。
+- 两个 skills 都带有 `scripts/make_image_pptx.py`，把 PNG 按顺序打包成 16:9 PPTX；依赖 `python-pptx`。
+- 保留论文原图、官方图表或截图时，先保存原始素材，在 imagegen 页面中预留位置，再用 `scripts/embed_source_figures.py` 嵌入；依赖 Pillow。不要把重绘结果称为原图。
+- 生成后检查文字、箭头方向、系统边界和表格最后一行；超过三页时检查整套预览。

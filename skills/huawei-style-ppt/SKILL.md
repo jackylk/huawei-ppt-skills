@@ -1,6 +1,6 @@
 ---
 name: huawei-style-ppt
-description: "Create Huawei-style enterprise technical presentation decks and slide images. Use when the user asks for Huawei-style PPT, white/red Chinese management-report slides, strategy/architecture decks, imagegen-generated PPT pages, or wants generated slide images assembled into a PPTX."
+description: "Use when the user asks for Huawei-style PPT in 汇报版 or 生动版, white/red Chinese enterprise reports, vivid illustrated technical architecture or scenario slides, or imagegen slide images assembled into a PPTX."
 ---
 
 # Huawei-Style PPT
@@ -9,9 +9,20 @@ Use this skill to create Chinese enterprise technical-report slides in a Huawei-
 
 This skill has one output mode: **full-page imagegen slides assembled into PPTX**. Do not switch to editable/native PPTX, hybrid rebuilds, or native PowerPoint shape/text generation inside this skill. If the user asks for editable PPT, explain that this skill is optimized for full-page imagegen output and suggest using a separate editable-PPT workflow.
 
+## Choose the Visual Edition
+
+These are two visual editions of this skill, not separate output formats:
+
+| Edition | Choose when | Visual treatment |
+| --- | --- | --- |
+| **汇报版 (report, default)** | The user requests 汇报版, formal management/board reporting, or gives no visual preference | The original restrained white/red/gray style: structured diagrams, evidence boards, matrices and roadmaps. Read [references/style-guide.md](references/style-guide.md). |
+| **生动版 (lively)** | The user requests 生动版, asks for more vivid/形象/活泼 scene-based explanation, or supplies a reference in this style | People and friendly Agent illustrations, concrete files/devices/systems, and labeled process/feedback paths within the same enterprise grid. Read [references/lively-style.md](references/lively-style.md). |
+
+An explicit edition or supplied visual reference takes precedence over the default. Do not ask again when the choice is already clear. Record the edition in the slide plan and each imagegen prompt; preserve it during revisions. 生动版 retains technical depth and can contain a text-first table with no characters when the content calls for it. Do not automatically add mascots or reduce information density on every page.
+
 ## Workflow
 
-1. Clarify the deck outline, audience, and slide count if not already clear.
+1. Establish the edition, deck outline, audience, and slide count from the request; clarify only missing information that affects the result.
 2. Draft each slide as a concise message: title, claim, main proof object, layout zones, and bottom viewpoint.
 3. Generate each slide as a 16:9 PNG with `imagegen`.
 4. When an exact paper figure, chart, or official screenshot must appear, embed the saved original in a reserved box on that PNG using `scripts/embed_source_figures.py`.
@@ -42,7 +53,7 @@ The helper requires Pillow. Keep the unaltered ImageGen output and source asset 
 
 ## Style Rules
 
-Follow `references/style-guide.md` for exact visual rules and reusable layout patterns. For covers, architecture pages, mechanism pages, scenario pages, roadmap pages, and validation/KPI pages, read the corresponding section before writing imagegen prompts. The core style is:
+Use the selected edition's reference for visual rules, layouts and prompt examples. `references/style-guide.md` preserves the original **汇报版**; `references/lively-style.md` defines **生动版**. Both share these essentials:
 
 - White background.
 - Black titles, never colored titles.
@@ -52,7 +63,7 @@ Follow `references/style-guide.md` for exact visual rules and reusable layout pa
 - No black panels, no dark brush headers, no page numbers beside titles.
 - Clean covers: main title, subtitle, date/author metadata, and at most 2-3 compact scenario/topic cards. Do not put architecture diagrams, dense object chips, evidence boards, logo strips, or KPI matrices on the cover.
 - Bottom viewpoint/conclusion should use restrained Huawei-red treatment: pale-red callout, thin red rule, red left bar, or small red `判断` / `启示` label. Avoid large pure-red frames and thick red boxes.
-- Layouts are management-report proof objects: layered architecture, left visual/right explanation, comparison matrix, roadmap, capability grid, control-flow, scenario flow, evidence board, validation/KPI matrix.
+- Layouts use a proof object appropriate to the content: architecture, scene/process, comparison matrix, roadmap, control-flow, evidence board or validation/KPI matrix.
 - Overall architecture pages should not be diagram-only; include a right-side explanation panel unless the user explicitly asks for a pure visual.
 
 ## Huawei Red Discipline
@@ -75,6 +86,7 @@ Use this structure for each generated slide:
 
 ```text
 Use case: productivity-visual
+Edition: <汇报版 / 生动版; include the selected edition's visual treatment>
 Asset type: 16:9 full-slide Chinese enterprise PPT page, 1920x1080.
 Strict style rules: Huawei-like white report style; no slide number; no title number; no numeric markers unless explicitly required; title must be black; all normal boxes use Huawei gray outlines (#BFBFBF / #D9D9D9); no black panels; no logos; no watermark. Red only for arrows, emphasized keywords, selected marks, and restrained conclusion treatment. Avoid thick red frames, large red outline boxes, and solid red panels.
 
@@ -88,7 +100,7 @@ Bottom conclusion treatment: restrained Huawei-red callout, preferably pale-red 
 Design quality: formal Huawei-style management technical briefing, clean grid, readable Chinese and English labels, professional, high information density but not crowded.
 ```
 
-For cover slides, use the `Clean Cover` rules in `references/style-guide.md`: keep the cover sparse, with title, subtitle, optional 2-3 small scenario/topic cards, date, author/owner, and one restrained red rule.
+For an actual cover, keep it sparse: title, subtitle, optional 2-3 compact scenario/topic cards, requested metadata, and one restrained red rule. A first-page challenge analysis or architecture overview is a content page, not a cover; give it the explanation its topic needs.
 
 ## Packaging
 
@@ -127,3 +139,6 @@ Before final delivery, verify:
 - Bottom conclusions use pale-red callouts, thin red rules, or red left bars unless an exceptional warning page needs stronger treatment.
 - Page 3/story pages clearly show the intended business logic, not only abstract labels.
 - Generated Chinese is legible; reject pages with garbled Chinese, unreadable labels, or obvious layout collisions.
+- The selected edition is consistent. In 生动版, illustrations explain roles, actions or outcomes rather than filling space.
+- Read each arrow as a sentence: source, action and destination must be correct; independently inspect query/response and question/feedback directions.
+- Preserve user-approved detail and full process sentences. For dense tables, inspect every row and its bottom padding; never let a footer hide the last row.

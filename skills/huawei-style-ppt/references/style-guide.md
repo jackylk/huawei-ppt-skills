@@ -1,6 +1,6 @@
-# Huawei-Style Enterprise PPT Guide
+# Huawei-Style Enterprise PPT Guide — 汇报版
 
-This is a general Huawei-like enterprise presentation style guide. It covers visual system, cover style, common slide layouts, prompt discipline, and QA rules. It is not limited to technical-planning decks.
+This is the original **汇报版 (report edition)** and the default when no visual preference is supplied. It covers the restrained enterprise visual system, cover style, common layouts, prompts and QA. For **生动版 (lively edition)**, use [lively-style.md](lively-style.md); both editions keep white backgrounds, black titles, gray structure and restrained red emphasis.
 
 ## Visual System
 
@@ -29,7 +29,7 @@ Avoid:
 - Section headers: 10-14 pt.
 - Body text: 8-12 pt depending on density.
 - Table text can be small only if the slide is meant for monitor reading.
-- Use Chinese management-report phrasing. Prefer compressed phrases and named mechanisms over long paragraphs.
+- Use compact Chinese management-report labels. When explaining a process or preserving approved wording, keep complete sentences and causal detail instead of compressing them into unexplained keywords.
 
 ## Clean Cover
 
@@ -222,9 +222,9 @@ Bottom viewpoint: 没有对象协议，输入层只能做文本增强；有对�
 For imagegen slides:
 
 - Keep titles concise but judgment-led.
-- Keep each card to one heading plus 1-2 short lines.
+- Use one heading plus 1-2 short lines for summary cards. Detailed challenge/process pages can use paragraphs when the user needs the reasoning explained.
 - Dense pages are acceptable when they have a real proof object: matrix, architecture, process, data-flow, evidence board, or KPI table.
-- Avoid long prose paragraphs. Use compressed phrases.
+- Match density to the task. Preserve user-approved full sentences in process tables; allocate column widths and row heights to the text, inspect all rows, and split only if readability cannot be achieved and the user has not fixed the page count.
 - Use English technical labels only where they improve recognition.
 
 ## Quality Checks
