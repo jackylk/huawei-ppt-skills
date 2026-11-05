@@ -1,11 +1,12 @@
 # Huawei PPT Skills
 
-面向中文企业汇报与技术规划的两个 Codex skills，通过 imagegen 生成整页图片并组装为 16:9 PPTX。
+面向中文企业汇报、技术规划与介绍视频的三个 Codex skills：通过 imagegen 制作 PPT 页面与视频视觉素材，交付 16:9 PPTX 或带中文旁白、字幕的 MP4。
 
 ## 选择 Skill
 
 | Skill | 适用任务 |
 | --- | --- |
+| [ppt-to-video](skills/ppt-to-video/SKILL.md) | 把 PPT 改编为中文故事视频，包含 imagegen 素材、对象动画、旁白、字幕与 MP4 验收；简单故事优先 30–60 秒。 |
 | [huawei-style-ppt](skills/huawei-style-ppt/SKILL.md) | 企业汇报、架构、机制、场景、比较表和路线图，支持**汇报版**与**生动版**。 |
 | [huawei-tech-planning-ppt](skills/huawei-tech-planning-ppt/SKILL.md) | 从深度调研、洞察与策略到技术规划 PPT，并可继续形成开发任务书和讲解包。 |
 
@@ -96,7 +97,7 @@ outputs/<deck-name>/
 
 可直接对 Codex 说：
 
-> 请安装 https://github.com/jackylk/huawei-ppt-skills 中的 huawei-style-ppt 和 huawei-tech-planning-ppt，复制到本机 skills 目录，检查 python-pptx 与 Pillow 依赖，并说明是否需要重启以重新发现技能。
+> 请安装 https://github.com/jackylk/huawei-ppt-skills 中的 huawei-style-ppt、huawei-tech-planning-ppt 和 ppt-to-video 三个 skills，复制到本机 skills 目录，检查 PPT 所需的 python-pptx、Pillow，以及视频所需的图像生成、中文语音、Remotion、浏览器与 FFmpeg 等能力，并说明是否需要重启以重新发现技能。
 
 手工安装：
 
@@ -105,6 +106,7 @@ git clone https://github.com/jackylk/huawei-ppt-skills.git
 mkdir -p ~/.codex/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.codex/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.codex/skills/
+cp -R huawei-ppt-skills/skills/ppt-to-video ~/.codex/skills/
 python3 -m pip install python-pptx Pillow
 ```
 
@@ -116,6 +118,7 @@ python3 -m pip install python-pptx Pillow
 mkdir -p ~/.claude/skills
 cp -R huawei-ppt-skills/skills/huawei-style-ppt ~/.claude/skills/
 cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.claude/skills/
+cp -R huawei-ppt-skills/skills/ppt-to-video ~/.claude/skills/
 ```
 
 完整生成图片页需要运行环境提供图像生成工具；没有工具时，可以编写页稿和提示词，但不能声称已经生成最终图片页。
@@ -123,6 +126,29 @@ cp -R huawei-ppt-skills/skills/huawei-tech-planning-ppt ~/.claude/skills/
 ## 输出与原图保真
 
 - PPTX 每页是一张整页图片，文字和图形不能逐项编辑；保留页稿、提示词及源素材以便修改。
-- 两个 skills 都带有 `scripts/make_image_pptx.py`，把 PNG 按顺序打包成 16:9 PPTX；依赖 `python-pptx`。
+- 两个 PPT skills 都带有 `scripts/make_image_pptx.py`，把 PNG 按顺序打包成 16:9 PPTX；依赖 `python-pptx`。
 - 保留论文原图、官方图表或截图时，先保存原始素材，在 imagegen 页面中预留位置，再用 `scripts/embed_source_figures.py` 嵌入；依赖 Pillow。不要把重绘结果称为原图。
 - 生成后检查文字、箭头方向、系统边界和表格最后一行；超过三页时检查整套预览。
+
+## PPT 转介绍视频
+
+`ppt-to-video` 把 PPT 的内容改编成连贯故事，用人物、Agent、文件和平台等独立视觉对象解释动作与因果，交付可播放 MP4、字幕、片段预览和可复用源码。
+
+```text
+Use $ppt-to-video，把这两页 PPT 做成约 40 秒的中文介绍视频。
+先讲一个具体问题，再展示方案和最终效果，与开头形成对比。
+使用 imagegen 制作角色、办公背景与业务对象；人物保持在画面内，转场连贯。
+```
+
+```text
+Use $ppt-to-video，把这份 PPT 制作成约两分钟的中文客户介绍视频。
+面向技术负责人，用动画解释关键机制，保留来源与事实边界。
+```
+
+制作流程：理解材料与事实边界 → 精简主线与分镜 → 生成中文旁白并测量时长 → imagegen 素材与对象动画 → 编码输出与连续帧验收。简单故事优先 30–60 秒，复杂材料按需要延长；不会把整页 PPT 的平移缩放当成角色动画。
+
+已有 PPT 时直接复用其项目目录，MP4、字幕、源码包与 PPT 放在一起。持续存在的背景、人物和设备跨镜头保留，新增内容按旁白出场；共享、传递等动作留出阅读与抵达停留时间。局部修改复用已确认的内容和素材。
+
+视频需要可用的 imagegen、中文语音工具（例如 edge-tts）、浏览器与渲染运行时。采用 Remotion 时统一安装匹配版本的 Remotion、React 等依赖，由项目共享；FFmpeg 用于媒体检查和必要的编码处理。上面的 Python 安装命令仅覆盖 PPT 依赖，不会自动配置视频环境。缺少语音或渲染能力时，应明确说明，不能把模板或静音片当成有声成片。
+
+详细规范：[视频 skill](skills/ppt-to-video/SKILL.md) · [叙事与素材](skills/ppt-to-video/references/story-and-assets.md) · [动画与渲染](skills/ppt-to-video/references/motion-and-render.md) · [成片验收](skills/ppt-to-video/references/acceptance.md)
